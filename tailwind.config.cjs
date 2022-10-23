@@ -4,8 +4,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        bgdasar: "#1AC8C8",
-        hitam: "#3E3E3D",
+        bgDasar: "#1AC8C8",
+        bgHitam: "#3E3E3D",
       },
       fontFamily: {
         poppins: ["poppins", "sans-serif"],
