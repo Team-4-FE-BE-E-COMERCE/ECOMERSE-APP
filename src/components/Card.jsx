@@ -8,7 +8,7 @@ function Card() {
     borderRadius: "0.5em 0.5em 0 0",
   };
   return (
-    <div className="grid lg:grid-cols-4 font-poppins">
+    <div className="grid  font-poppins">
       <div className="m-2 flex flex-col bg-white shadow-lg rounded-md  items-center mb-3">
         <div className="w-full mb-3">
           <img src="https://pict.sindonews.net/dyn/850/pena/news/2021/09/13/700/538850/faktafakta-yang-membuat-hidup-batman-menyedihkan-uri.jpg" alt="" style={imgProduct} />
@@ -35,7 +35,7 @@ function CardBtn() {
     borderRadius: "0.5em 0.5em 0 0",
   };
   return (
-    <div className="grid lg:grid-cols-4 font-poppins">
+    <div className="grid font-poppins">
       <div className="m-2 flex flex-col bg-white shadow-lg rounded-md  items-center mb-3">
         <div className="w-full mb-3">
           <img src="https://pict.sindonews.net/dyn/850/pena/news/2021/09/13/700/538850/faktafakta-yang-membuat-hidup-batman-menyedihkan-uri.jpg" alt="" style={imgProduct} />
