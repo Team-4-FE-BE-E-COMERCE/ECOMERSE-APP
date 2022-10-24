@@ -3,9 +3,9 @@ import Header from "./Header";
 
 function Layout(props) {
   return (
-    <div className="">
+    <div>
       <Header />
-      <div className="">{props.children}</div>
+      <div className="container  px-4 mx-auto items-center">{props.children}</div>
     </div>
   );
 }
