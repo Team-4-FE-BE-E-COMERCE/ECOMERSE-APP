@@ -5,6 +5,7 @@ function CustomInput({ id, type, placeholder, value, onChange, disabled }) {
     <input
       id={id}
       className="
+      w-full
     bg-white rounded text-hitam p-2 border focus:outline-none
     focus:border-bgdasar focus:ring-1
     focus:ring-bgdasar"
