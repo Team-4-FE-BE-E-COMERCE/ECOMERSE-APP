@@ -4,7 +4,7 @@ import { WithRouter } from "../utils/Navigation";
 import { Link } from "react-router-dom";
 
 import CustomInput from "../components/CustomInput";
-import CustomButton from "../components/CustomButton";
+import { CustomButton } from "../components/CustomButton";
 
 function Register() {
   return (
