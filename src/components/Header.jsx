@@ -7,7 +7,11 @@ function Header() {
   return (
     <nav className="relative flex  items-center justify-between px-2 py-3 bg-bgdasar mb-3 font-poppins">
       <div className="container flex justify-between  px-4 mx-auto items-center">
-        <div className="font-bold text-2xl">LOGO</div>
+        <div className="font-bold text-2xl text-white">
+          <h3>
+            <strong>LOGO</strong>
+          </h3>
+        </div>
         <div className="flex justify-center items-center">
           <div className="flex justify-center">
             <div className=" xl:w-96">
@@ -28,7 +32,7 @@ function Header() {
             </div>
           </div>
         </div>
-        <div className="flex justify-between">
+        <div className="flex justify-between text-white">
           <div className="mx-4 ">
             <FaCartPlus className="w-6 h-auto" />
             {/* <button className="bg-white text-bgdasar font-bold py-1 px-4 rounded">Masuk</button> */}
