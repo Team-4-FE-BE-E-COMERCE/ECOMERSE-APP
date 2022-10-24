@@ -1,12 +1,14 @@
 import "../styles/App.css";
+import Layout from "../components/Layout";
 
 function App() {
   return (
-    <div className="App">
+    <Layout>
       <div>
         <p className="read-the-docs text-bgdasar font-poppins">Home Sebelum Login</p>
+        <p>asa</p>
       </div>
-    </div>
+    </Layout>
   );
 }
 
