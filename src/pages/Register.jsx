@@ -1,4 +1,8 @@
 import React from "react";
+
+import { WithRouter } from "../utils/Navigation";
+import { Link } from "react-router-dom";
+
 import CustomInput from "../components/CustomInput";
 import CustomButton from "../components/CustomButton";
 
@@ -27,7 +31,9 @@ function Register() {
             </div>
             <div className="mt-10 flex items-center">
               <div className="m-1">Do You Have an Account?</div>
-              <div className="m-1 text-white font-bold"> Log In</div>
+              <Link to="/login">
+                <div className="m-1 text-white font-bold"> Log In</div>
+              </Link>
             </div>
           </div>
         </div>
@@ -36,4 +42,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default WithRouter(Register);

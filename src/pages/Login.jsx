@@ -1,4 +1,8 @@
 import React from "react";
+
+import { WithRouter } from "../utils/Navigation";
+import { Link } from "react-router-dom";
+
 import CustomInput from "../components/CustomInput";
 
 function Login() {
@@ -26,11 +30,13 @@ function Login() {
         </div>
         <div className="mt-10 flex items-center">
           <div className="m-1">Don't You Have an Account?</div>
-          <div className="m-1 text-bgdasar font-bold"> Register</div>
+          <Link to="/register">
+            <div className="m-1 text-bgdasar font-bold"> Register</div>
+          </Link>
         </div>
       </div>
     </div>
   );
 }
 
-export default Login;
+export default WithRouter(Login);
