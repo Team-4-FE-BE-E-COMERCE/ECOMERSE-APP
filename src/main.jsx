@@ -1,13 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./pages/App";
+
 import "./styles/index.css";
-import Home from "./pages/index";
-import Login from "./pages/LogIn";
-import Register from "./pages/Register";
+
+import App from "./routes";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Register />
+    <App />
   </React.StrictMode>
 );
