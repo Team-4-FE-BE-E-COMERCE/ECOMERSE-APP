@@ -5,7 +5,7 @@ import { FaCartPlus } from "react-icons/fa";
 
 function Header() {
   return (
-    <nav className="relative flex  items-center justify-between px-2 py-3 bg-bgdasar mb-3 font-poppins">
+    <nav className="relative flex  items-center justify-between px-2 py-3 bg-bgdasar mb-16 font-poppins">
       <div className="container flex justify-between  px-4 mx-auto items-center">
         <div className="font-bold text-2xl text-white">
           <h3>
@@ -23,7 +23,10 @@ function Header() {
                   aria-label="Search"
                   aria-describedby="button-addon2"
                 />
-                <span className="input-group-text flex items-center px-3  text-base  text-gray-700 text-center whitespace-nowrap rounded" id="basic-addon2">
+                <span
+                  className="input-group-text flex items-center px-3  text-base  text-gray-700 text-center whitespace-nowrap rounded"
+                  id="basic-addon2"
+                >
                   <div className="mx-1 text-white">
                     <AiOutlineSearch className="w-6 h-auto" />
                   </div>

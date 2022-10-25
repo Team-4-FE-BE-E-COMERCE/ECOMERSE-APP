@@ -8,6 +8,7 @@ import HomeLogin from "../pages/HomeLogin";
 import Profile from "../pages/Profile";
 import ProfilOrang from "../pages/ProfilOrang";
 import EditProfile from "../pages/EditProfile";
+import ProductDetails from "../pages/ProductDetails";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/home" element={<HomeLogin />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/profilepenjual" element={<ProfilOrang />} />
+        <Route path="/detailsproduct" element={<ProductDetails />} />
         <Route path="*" element={<div>Kok nda bisa</div>} />
         <Route path="/edit" element={<EditProfile />} />
       </Routes>
