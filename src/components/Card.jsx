@@ -4,7 +4,7 @@ import { ImBin2 } from "react-icons/im";
 import { AiOutlinePlusCircle, AiOutlineMinusCircle } from "react-icons/ai";
 import { useState } from "react";
 
-function Card() {
+function Card(props) {
   const imgProduct = {
     width: "100%",
     height: "auto",
@@ -15,16 +15,17 @@ function Card() {
     <div className="grid  font-poppins">
       <div className="m-2 flex flex-col bg-white shadow-lg rounded-md  items-center mb-3">
         <div className="w-full mb-3">
-          <img src="https://pict.sindonews.net/dyn/850/pena/news/2021/09/13/700/538850/faktafakta-yang-membuat-hidup-batman-menyedihkan-uri.jpg" alt="" style={imgProduct} />
+          {/* https://pict.sindonews.net/dyn/850/pena/news/2021/09/13/700/538850/faktafakta-yang-membuat-hidup-batman-menyedihkan-uri.jpg */}
+          <img src={`${props.gambar}`} alt="" style={imgProduct} />
         </div>
         <div className="Flex justify-start m-2 w-full pl-4">
           <div>
             <h3 className="font-bold">
-              <strong>Product Title</strong>
+              <strong>{props.produk}</strong>
             </h3>
           </div>
-          <div>Prize : Rp. 50.000</div>
-          <div>Total stok : Current 6</div>
+          <div>Price : Rp.{props.harga}</div>
+          <div>Total stok : {props.stock}</div>
         </div>
       </div>
     </div>
