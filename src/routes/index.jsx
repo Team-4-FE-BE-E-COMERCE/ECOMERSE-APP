@@ -15,7 +15,11 @@ import ProfilOrang from "../pages/ProfilOrang";
 import EditProfile from "../pages/EditProfile";
 import ProductDetails from "../pages/ProductDetails";
 import axios from "axios";
+<<<<<<< HEAD
 import ProductUpload from "../pages/ProductUpload";
+=======
+import CartDetail from "../pages/CartDetail";
+>>>>>>> 74421a3 (slicing cart detail)
 
 function App() {
   const isLoggedIn = useSelector((state) => state.data.isLoggedIn);
@@ -66,7 +70,11 @@ function App() {
             <Route path="*" element={<div>Kok nda bisa</div>} />
             <Route path="/edit" element={<EditProfile />} />
             <Route path="/detailsproduct" element={<ProductDetails />} />
+<<<<<<< HEAD
             <Route path="/productupload" element={<ProductUpload />} />
+=======
+            <Route path="/cart" element={<CartDetail />} />
+>>>>>>> 74421a3 (slicing cart detail)
           </Routes>
         </BrowserRouter>
       </ThemeContext.Provider>
