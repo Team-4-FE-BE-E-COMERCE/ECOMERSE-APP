@@ -7,6 +7,7 @@ import Home from "../pages";
 import HomeLogin from "../pages/HomeLogin";
 import Profile from "../pages/Profile";
 import ProfilOrang from "../pages/ProfilOrang";
+import EditProfile from "../pages/EditProfile";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/profilepenjual" element={<ProfilOrang />} />
         <Route path="*" element={<div>Kok nda bisa</div>} />
+        <Route path="/edit" element={<EditProfile />} />
       </Routes>
     </BrowserRouter>
   );
