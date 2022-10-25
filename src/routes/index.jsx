@@ -14,8 +14,9 @@ import Profile from "../pages/Profile";
 import ProfilOrang from "../pages/ProfilOrang";
 import EditProfile from "../pages/EditProfile";
 import ProductDetails from "../pages/ProductDetails";
-import axios from "axios";
 import ProductUpload from "../pages/ProductUpload";
+import Order from "../pages/Order";
+import axios from "axios";
 
 function App() {
   const isLoggedIn = useSelector((state) => state.data.isLoggedIn);
@@ -67,6 +68,7 @@ function App() {
             <Route path="/edit" element={<EditProfile />} />
             <Route path="/detailsproduct" element={<ProductDetails />} />
             <Route path="/productupload" element={<ProductUpload />} />
+            <Route path="/order" element={<Order />} />
           </Routes>
         </BrowserRouter>
       </ThemeContext.Provider>
