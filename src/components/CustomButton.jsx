@@ -5,7 +5,7 @@ function CustomButton({ id, label, loading, onClick }) {
     <button
       id={id}
       className={`bg-white text-bgdasar
-    w-full font-bold py-2 px-4 rounded ${loading && "bg-slate-500 cursor-not-allowed"} `}
+    w-full font-bold py-2 px-4 rounded ${loading && "bg-white cursor-not-allowed"} `}
       onClick={onClick}
       disabled={loading}
     >
