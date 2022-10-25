@@ -17,6 +17,7 @@ import ProductDetails from "../pages/ProductDetails";
 import axios from "axios";
 import ProductUpload from "../pages/ProductUpload";
 import CartDetail from "../pages/CartDetail";
+import Order from "../pages/Order";
 
 function App() {
   const isLoggedIn = useSelector((state) => state.data.isLoggedIn);
@@ -48,7 +49,9 @@ function App() {
     } else {
       dispatch(handleAuth(false));
     }
-    axios.defaults.headers.common["Authorization"] = getToken ? `Bearer ${getToken}` : "";
+    axios.defaults.headers.common["Authorization"] = getToken
+      ? `Bearer ${getToken}`
+      : "";
   }, [isLoggedIn]);
 
   return (
@@ -67,6 +70,7 @@ function App() {
             <Route path="/detailsproduct" element={<ProductDetails />} />
             <Route path="/productupload" element={<ProductUpload />} />
             <Route path="/cart" element={<CartDetail />} />
+            <Route path="/order" element={<Order />} />
           </Routes>
         </BrowserRouter>
       </ThemeContext.Provider>
