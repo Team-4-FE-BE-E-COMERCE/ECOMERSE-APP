@@ -4,8 +4,54 @@ import Layout from "../components/Layout";
 import { Card } from "../components/Card";
 import { CgProfile } from "react-icons/cg";
 import { CustomButton } from "../components/CustomButton";
+import { useState, useEffect } from "react";
+import { handleAuth } from "../utils/redux/reducers/reducer";
+import { useDispatch } from "react-redux";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { data } from "autoprefixer";
+import Skeleton from "react-loading-skeleton";
 
-function Profile() {
+function Profile(props) {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
+  const [datas, setDatas] = useState([]);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    axios
+      .get("https://virtserver.swaggerhub.com/HERIBUDIYANA/E-Commerce/1.0.0/users", {})
+      .then((res) => {
+        const { data } = res.data;
+        setDatas(data);
+      })
+      .catch((err) => {
+        const { data } = err.response;
+        if ([401, 403].includes(data.code)) {
+          localStorage.removeItem("token");
+          dispatch(handleAuth(false));
+          navigate("/login");
+        }
+        alert(data.message);
+      })
+      .finally(() => setLoading(false));
+  };
+  console.log(datas);
+
+  // const handleSubmit = async(e) =>{
+  //   setLoading(true)
+  //   e.preventDefault()
+  //   const formData = new FormData()
+  //   for (const key in objSubmit){
+  //     formData.append(key, objSubmit[key])
+  //   }
+
+  // }
+
   return (
     <Layout>
       <div className="flex flex-row font-poppins">
@@ -16,15 +62,15 @@ function Profile() {
                 <CgProfile className="" />
               </div>
               <div className="text-white">
-                <div>Alexander Mount</div>
-                <div>Alexander@gmail.com</div>
+                <div>{datas.name}</div>
+                <div>{datas.email}</div>
               </div>
             </div>
             <div className="px-4 text-white">
-              <div className="my-4">Number Phone : 08534213432</div>
-              <div className="my-4">Addres : Jl. Kota Baru No.23, New York</div>
-              <div className="my-4">Saldo : Rp. 200.000</div>
-              <div className="my-4">Bio : -</div>
+              <div className="my-4">Number Phone : {datas.phone}</div>
+              <div className="my-4">Addres : {datas.address}</div>
+              <div className="my-4">Saldo : {datas.saldo}</div>
+              <div className="my-4">Bio : {datas.bio}</div>
             </div>
 
             <div className="flex px-4 my-4">
@@ -46,17 +92,7 @@ function Profile() {
           </div>
         </div>
         <div className="basis-3/4">
-          <div className="grid grid-cols-3">
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-          </div>
+          <div className="grid grid-cols-3">{loading ? <Skeleton /> : datas.product.map((datum) => <Card produk={datum.name} gambar={datum.images} harga={datum.price} stock={datum.stock} />)}</div>
         </div>
       </div>
     </Layout>
