@@ -15,6 +15,7 @@ import ProfilOrang from "../pages/ProfilOrang";
 import EditProfile from "../pages/EditProfile";
 import ProductDetails from "../pages/ProductDetails";
 import axios from "axios";
+import ProductUpload from "../pages/ProductUpload";
 
 function App() {
   const isLoggedIn = useSelector((state) => state.data.isLoggedIn);
@@ -46,7 +47,9 @@ function App() {
     } else {
       dispatch(handleAuth(false));
     }
-    axios.defaults.headers.common["Authorization"] = getToken ? `Bearer ${getToken}` : "";
+    axios.defaults.headers.common["Authorization"] = getToken
+      ? `Bearer ${getToken}`
+      : "";
   }, [isLoggedIn]);
 
   return (
@@ -63,6 +66,7 @@ function App() {
             <Route path="*" element={<div>Kok nda bisa</div>} />
             <Route path="/edit" element={<EditProfile />} />
             <Route path="/detailsproduct" element={<ProductDetails />} />
+            <Route path="/productupload" element={<ProductUpload />} />
           </Routes>
         </BrowserRouter>
       </ThemeContext.Provider>
