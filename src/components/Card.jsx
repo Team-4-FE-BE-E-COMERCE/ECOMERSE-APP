@@ -32,7 +32,7 @@ function Card(props) {
   );
 }
 
-function CardBtn() {
+function CardBtn(props) {
   const imgProduct = {
     width: "100%",
     height: "auto",
@@ -43,16 +43,16 @@ function CardBtn() {
     <div className="grid font-poppins">
       <div className="m-2 flex flex-col bg-white shadow-lg rounded-md  items-center mb-3">
         <div className="w-full mb-3">
-          <img src="https://pict.sindonews.net/dyn/850/pena/news/2021/09/13/700/538850/faktafakta-yang-membuat-hidup-batman-menyedihkan-uri.jpg" alt="" style={imgProduct} />
+          <img src={props.images} alt="" style={imgProduct} />
         </div>
         <div className="Flex justify-start m-2 w-full pl-4">
           <div>
             <h3 className="font-bold">
-              <strong>Product Title</strong>
+              <strong>{props.name}</strong>
             </h3>
           </div>
-          <div>Prize : Rp. 50.000</div>
-          <div>Total stok : Current 6</div>
+          <div>Prize : Rp. {props.price}</div>
+          <div>Total stok : {props.stock}</div>
         </div>
         <div className="m-3 w-full px-4">
           <CustomButtonSatu label="Add To Cart" />
@@ -81,7 +81,11 @@ function CardCart() {
           </label>
         </div>
         <div className="m-1 border">
-          <img src="https://pict.sindonews.net/dyn/850/pena/news/2021/09/13/700/538850/faktafakta-yang-membuat-hidup-batman-menyedihkan-uri.jpg" alt="" style={imgProduct} />
+          <img
+            src="https://pict.sindonews.net/dyn/850/pena/news/2021/09/13/700/538850/faktafakta-yang-membuat-hidup-batman-menyedihkan-uri.jpg"
+            alt=""
+            style={imgProduct}
+          />
         </div>
         <div className="flex flex-col border m-2 w-full h-full justify-between">
           <div className="m-2">
