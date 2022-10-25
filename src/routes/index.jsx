@@ -18,6 +18,7 @@ import axios from "axios";
 import ProductUpload from "../pages/ProductUpload";
 import CartDetail from "../pages/CartDetail";
 import Order from "../pages/Order";
+import OrderHistory from "../pages/OrderHistory";
 
 function App() {
   const isLoggedIn = useSelector((state) => state.data.isLoggedIn);
@@ -71,6 +72,7 @@ function App() {
             <Route path="/productupload" element={<ProductUpload />} />
             <Route path="/cart" element={<CartDetail />} />
             <Route path="/order" element={<Order />} />
+            <Route path="/orderhistory" element={<OrderHistory />} />
           </Routes>
         </BrowserRouter>
       </ThemeContext.Provider>
