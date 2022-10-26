@@ -10,6 +10,7 @@ import { handleAuth } from "../utils/redux/reducers/reducer";
 
 import CustomInput from "../components/CustomInput";
 import { CustomButton } from "../components/CustomButton";
+import { useTitle } from "../utils/redux/useTitle";
 
 function Login() {
   const navigate = useNavigate();
@@ -18,6 +19,8 @@ function Login() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [disabled, setDisabled] = useState(true);
+
+  useTitle("Login");
 
   useEffect(() => {
     if (email && password) {

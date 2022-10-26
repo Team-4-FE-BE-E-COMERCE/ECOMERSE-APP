@@ -3,8 +3,11 @@ import { WithRouter } from "../utils/Navigation";
 import Layout from "../components/Layout";
 import { CardBtn } from "../components/Card";
 import { CgProfile } from "react-icons/cg";
-import { CustomButton } from "../components/CustomButton";
+import { useTitle } from "../utils/redux/useTitle";
+
 function ProfilOrang() {
+  useTitle("Profile | Orang");
+
   return (
     <Layout>
       <div className="flex flex-row font-poppins">

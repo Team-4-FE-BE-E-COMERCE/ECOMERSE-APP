@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { handleAuth } from "../utils/redux/reducers/reducer";
 import { useDispatch } from "react-redux";
 import axios from "axios";
+import { useTitle } from "../utils/redux/useTitle";
 
 function HomeLogin() {
   const dispath = useDispatch();
@@ -26,6 +27,8 @@ function HomeLogin() {
   const [description, setDescription] = useState("");
   const [images, setImages] = useState("");
   const [disabled, setDisabled] = useState(true);
+
+  useTitle("Home");
 
   useEffect(() => {
     fetchData();

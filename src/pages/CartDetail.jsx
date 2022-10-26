@@ -2,8 +2,10 @@ import React from "react";
 import Layout from "../components/Layout";
 import { CardCart } from "../components/Card";
 import { CustomButtonSatu } from "../components/CustomButton";
+import { useTitle } from "../utils/redux/useTitle";
 
 function CartDetail() {
+  useTitle("My Cart");
   return (
     <Layout>
       <div className="flex flex-row fonr-poppins">

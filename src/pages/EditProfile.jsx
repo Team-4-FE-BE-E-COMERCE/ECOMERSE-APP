@@ -6,6 +6,7 @@ import { CustomButtonSatu } from "../components/CustomButton";
 import CustomInput from "../components/CustomInput";
 import { CustomComment } from "../components/CustomComment";
 import { Link } from "react-router-dom";
+import { useTitle } from "../utils/redux/useTitle";
 
 import { handleAuth } from "../utils/redux/reducers/reducer";
 import { useState, useEffect } from "react";
@@ -24,6 +25,8 @@ function EditProfile() {
   const [password, setPassword] = useState("");
   const [bio, setBio] = useState("");
   const [loading, setLoading] = useState("");
+
+  useTitle("Edit Profile");
 
   useEffect(() => {
     fetchData();
