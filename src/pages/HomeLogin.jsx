@@ -92,7 +92,7 @@ function HomeLogin() {
     <Layout>
       <div class="lg:flex flex-row font-poppins">
         <div class="lg:basis-3/4">
-          <div className="grid lg:grid-cols-3">{loading ? <Skeleton /> : datas.map((datum) => <CardBtn produk={datum.name} gambar={datum.images} price={datum.price} stock={datum.stock} />)}</div>
+          <div className="grid lg:grid-cols-3">{loading ? <Skeleton /> : datas.map((datum) => <CardBtn name={datum.name} gambar={datum.images} price={datum.price} stock={datum.stock} />)}</div>
         </div>
         <form class="lg:basis-1/4 border bg-bgdasar rounded-xl  text-white h-screen mt-2" onSubmit={(e) => handleSubmit(e)}>
           <div className="m-2 text-center font-bold">Upload Your Sales Here</div>

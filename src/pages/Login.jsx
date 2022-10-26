@@ -11,6 +11,7 @@ import { handleAuth } from "../utils/redux/reducers/reducer";
 import CustomInput from "../components/CustomInput";
 import { CustomButton } from "../components/CustomButton";
 import { useTitle } from "../utils/redux/useTitle";
+import ImageLogin from "../assets/login.png";
 
 function Login() {
   const navigate = useNavigate();
@@ -55,29 +56,42 @@ function Login() {
 
   return (
     <div>
-      <div className="container  px-4 mx-auto flex flex-col justify-center items-center w-full h-screen font-poppins">
-        <form className="bg-bgdasar  rounded-md p-8  w-500 h-auto mb-10 " onSubmit={(e) => handleSubmit(e)}>
+      <div className="container  px-4 mx-auto font-poppins">
+        <div className="lg:grid grid-cols-2">
           <div>
-            <div className="flex flex-col  w-full my-2 text-white">
-              <h4> Email</h4>
-              <CustomInput id="input-email" type="email" placeholder="Your Email" onChange={(e) => setEmail(e.target.value)} />
+            <div className="flex justify-center items-center w-full h-full">
+              <div className="w-full flex flex-col items-center justify-center h-full">
+                <h1 className="font-bold text-bgdasar mb-24 lg:mt-0 mt-24">Login</h1>
+                <div className="w-2/3">
+                  <img src={ImageLogin} alt="image login" />
+                </div>
+                <div className="my-10 flex items-center">
+                  <div className="m-1">Don't You Have an Account?</div>
+                  <Link to="/register">
+                    <div className="m-1 text-bgdasar font-bold"> Register</div>
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
-          <div className=" bg-bgdasar ">
-            <div className="flex flex-col  w-full my-2 text-white">
-              <h4> Password</h4>
-              <CustomInput id="input-password" type="password" placeholder="Your Password" onChange={(e) => setPassword(e.target.value)} />
+          <div className="w-full h-screen bg-bgdasar container">
+            <div className="container h-full flex flex-col justify-center items-center p-10">
+              <form className="lg:w-2/3 w-full" onSubmit={(e) => handleSubmit(e)}>
+                <div className="border-white w-full my-5 text-white">
+                  <h4> Email</h4>
+                  <CustomInput id="input-email" type="email" placeholder="Your Email" onChange={(e) => setEmail(e.target.value)} />
+                </div>
+
+                <div className="text-white my-5 ">
+                  <h4> Password</h4>
+                  <CustomInput id="input-password" type="password" placeholder="Your Password" onChange={(e) => setPassword(e.target.value)} />
+                </div>
+                <div className="my-10">
+                  <CustomButton id="btn-login" label="Login" loading={loading || disabled} />
+                </div>
+              </form>
             </div>
           </div>
-          <div>
-            <CustomButton id="btn-login" label="Login" loading={loading || disabled} />
-          </div>
-        </form>
-        <div className="mt-10 flex items-center">
-          <div className="m-1">Don't You Have an Account?</div>
-          <Link to="/register">
-            <div className="m-1 text-bgdasar font-bold"> Register</div>
-          </Link>
         </div>
       </div>
     </div>
