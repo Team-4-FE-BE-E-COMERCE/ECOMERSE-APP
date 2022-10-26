@@ -12,12 +12,15 @@ import { useNavigate } from "react-router-dom";
 import { data } from "autoprefixer";
 import Skeleton from "react-loading-skeleton";
 import { Link } from "react-router-dom";
+import { useTitle } from "../utils/redux/useTitle";
 
 function Profile(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [datas, setDatas] = useState([]);
+
+  useTitle("My Profile");
 
   useEffect(() => {
     fetchData();
@@ -78,7 +81,9 @@ function Profile(props) {
             <div>
               <div className="p-4 text-white ">
                 My Order
-                <div className="p-4 bg-white text-bgdasar">ID Order 1</div>
+                <Link to="/orderhistory">
+                  <div className="p-4 bg-white text-bgdasar">ID Order 1</div>
+                </Link>
               </div>
             </div>
           </div>

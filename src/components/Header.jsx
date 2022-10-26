@@ -2,16 +2,19 @@ import React from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
 import { FaCartPlus } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 function Header() {
   return (
     <nav className="relative flex  items-center justify-between px-2 py-3 bg-bgdasar mb-16 font-poppins">
       <div className="container flex justify-between  px-4 mx-auto items-center">
-        <div className="font-bold text-2xl text-white">
-          <h3>
-            <strong>LOGO</strong>
-          </h3>
-        </div>
+        <Link to="/home">
+          <div className="font-bold text-2xl text-white">
+            <h3>
+              <strong>LOGO</strong>
+            </h3>
+          </div>
+        </Link>
         <div className="flex justify-center items-center">
           <div className="flex justify-center">
             <div className=" xl:w-96">
@@ -23,10 +26,7 @@ function Header() {
                   aria-label="Search"
                   aria-describedby="button-addon2"
                 />
-                <span
-                  className="input-group-text flex items-center px-3  text-base  text-gray-700 text-center whitespace-nowrap rounded"
-                  id="basic-addon2"
-                >
+                <span className="input-group-text flex items-center px-3  text-base  text-gray-700 text-center whitespace-nowrap rounded" id="basic-addon2">
                   <div className="mx-1 text-white">
                     <AiOutlineSearch className="w-6 h-auto" />
                   </div>
@@ -35,15 +35,19 @@ function Header() {
             </div>
           </div>
         </div>
-        <div className="flex justify-between text-white">
-          <div className="mx-4 ">
-            <FaCartPlus className="w-6 h-auto" />
-            {/* <button className="bg-white text-bgdasar font-bold py-1 px-4 rounded">Masuk</button> */}
-          </div>
-          <div className="mx-4">
-            <CgProfile className="w-6 h-auto" />
-            {/* <button className="bg-white text-bgdasar font-bold py-1 px-4 rounded">Daftar</button> */}
-          </div>
+        <div className="flex justify-between ">
+          <Link to="/cart">
+            <div className="mx-4 text-white">
+              <FaCartPlus className="w-6 h-auto" />
+              {/* <button className="bg-white text-bgdasar font-bold py-1 px-4 rounded">Masuk</button> */}
+            </div>
+          </Link>
+          <Link to="/profile">
+            <div className="mx-4 text-white">
+              <CgProfile className="w-6 h-auto" />
+              {/* <button className="bg-white text-bgdasar font-bold py-1 px-4 rounded">Daftar</button> */}
+            </div>
+          </Link>
         </div>
       </div>
     </nav>

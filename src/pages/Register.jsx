@@ -5,6 +5,7 @@ import axios from "axios";
 
 import { WithRouter } from "../utils/Navigation";
 import { Link } from "react-router-dom";
+import { useTitle } from "../utils/redux/useTitle";
 
 import CustomInput from "../components/CustomInput";
 import { CustomButton } from "../components/CustomButton";
@@ -17,6 +18,8 @@ function Register() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [disabled, setDisabled] = useState(true);
+
+  useTitle("Register");
 
   useEffect(() => {
     if (name && email && password) {

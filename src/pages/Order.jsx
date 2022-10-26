@@ -2,8 +2,10 @@ import Layout from "../components/Layout";
 import React from "react";
 import CustomInput from "../components/CustomInput";
 import { CustomButtonSatu } from "../components/CustomButton";
+import { useTitle } from "../utils/redux/useTitle";
 
 function Order() {
+  useTitle("Order");
   return (
     <Layout>
       <div className=" flex justify-center">
@@ -17,26 +19,13 @@ function Order() {
               <form className="text-center py-10 w-[35rem]  ">
                 <div>
                   <div className="flex flex-col  w-full mb-7  text-white">
-                    <CustomInput
-                      id="input-jalan"
-                      type="jalan"
-                      placeholder="Jln....."
-                      onChange={(e) => setEmail(e.target.value)}
-                    />
+                    <CustomInput id="input-jalan" type="jalan" placeholder="Jln....." onChange={(e) => setEmail(e.target.value)} />
                   </div>
                   <div className="flex flex-col  w-full  mb-7 text-white">
-                    <CustomInput
-                      id="input-kabupaten"
-                      type="Kabupaten"
-                      placeholder="Kabupaten / Kota"
-                      onChange={(e) => setEmail(e.target.value)}
-                    />
+                    <CustomInput id="input-kabupaten" type="Kabupaten" placeholder="Kabupaten / Kota" onChange={(e) => setEmail(e.target.value)} />
                   </div>
                   <div className="flex flex-col  w-full  mb-7 text-white">
-                    <label
-                      for="countries"
-                      class="block mb-2 text-sm font-medium text-hitam dark:text-gray-400"
-                    ></label>
+                    <label for="countries" class="block mb-2 text-sm font-medium text-hitam dark:text-gray-400"></label>
                     <select
                       id="countries"
                       class="bg-gray-50 border border-gray-300 text-hitam text-sm rounded focus:ring-bgdasar focus:border-bgdasar block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-bgdasar dark:focus:border-bg"
@@ -51,12 +40,7 @@ function Order() {
                     </select>
                   </div>
                   <div className="flex flex-col  w-full  mb-7 text-white">
-                    <CustomInput
-                      id="input-kodepos"
-                      type="kodepos"
-                      placeholder="Kode"
-                      onChange={(e) => setEmail(e.target.value)}
-                    />
+                    <CustomInput id="input-kodepos" type="kodepos" placeholder="Kode" onChange={(e) => setEmail(e.target.value)} />
                   </div>
                 </div>
               </form>
@@ -72,48 +56,25 @@ function Order() {
               <form className="text-center py-10  w-[35rem]  ">
                 <div>
                   <div className="flex flex-col  w-full mb-7  text-white">
-                    <CustomInput
-                      id="input-Visa"
-                      type="Visa"
-                      placeholder="Visa"
-                      onChange={(e) => setEmail(e.target.value)}
-                    />
+                    <CustomInput id="input-Visa" type="Visa" placeholder="Visa" onChange={(e) => setEmail(e.target.value)} />
                   </div>
                   <div className="flex flex-col  w-full  mb-7 text-white">
-                    <CustomInput
-                      id="input-namekartu"
-                      type="namekartu"
-                      placeholder="Nama Di Kartu Kredit"
-                      onChange={(e) => setEmail(e.target.value)}
-                    />
+                    <CustomInput id="input-namekartu" type="namekartu" placeholder="Nama Di Kartu Kredit" onChange={(e) => setEmail(e.target.value)} />
                   </div>
                   {/* Nomor Rekening */}
                   <div className="grid grid-cols-2 gap-4">
                     <div className="flex flex-col  w-full   mb-7 text-white">
-                      <CustomInput
-                        id="input-norekening"
-                        type="norekening"
-                        placeholder="Nomor Rekening"
-                        onChange={(e) => setEmail(e.target.value)}
-                      />
+                      <CustomInput id="input-norekening" type="norekening" placeholder="Nomor Rekening" onChange={(e) => setEmail(e.target.value)} />
                     </div>
                     <div>
                       <div className="flex flex-col  w-full  mb-7 text-white">
-                        <CustomInput
-                          id="input-norekening"
-                          type="norekening"
-                          placeholder="Nomor Rekening"
-                          onChange={(e) => setEmail(e.target.value)}
-                        />
+                        <CustomInput id="input-norekening" type="norekening" placeholder="Nomor Rekening" onChange={(e) => setEmail(e.target.value)} />
                       </div>
                     </div>
                     <p className="mt-4">Data Kadaluarsa</p>
                     <div className="grid grid-cols-2 gap-4">
                       <div className="flex flex-col  w-full  mb-7 text-white">
-                        <label
-                          for="countries"
-                          class="block mb-2 text-sm font-medium text-hitam dark:text-gray-400"
-                        ></label>
+                        <label for="countries" class="block mb-2 text-sm font-medium text-hitam dark:text-gray-400"></label>
                         <select
                           id="countries"
                           class="bg-gray-50 border border-gray-300 text-hitam text-sm rounded focus:ring-bgdasar focus:border-bgdasar block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-bgdasar dark:focus:border-bg"
@@ -128,10 +89,7 @@ function Order() {
                         </select>
                       </div>
                       <div className="flex flex-col  w-full  mb-7 text-white">
-                        <label
-                          for="countries"
-                          class="block mb-2 text-sm font-medium text-hitam dark:text-gray-400"
-                        ></label>
+                        <label for="countries" class="block mb-2 text-sm font-medium text-hitam dark:text-gray-400"></label>
                         <select
                           id="countries"
                           class="bg-gray-50 border border-gray-300 text-hitam text-sm rounded focus:ring-bgdasar focus:border-bgdasar block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-bgdasar dark:focus:border-bg"

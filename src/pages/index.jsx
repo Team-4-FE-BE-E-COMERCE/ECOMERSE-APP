@@ -5,13 +5,14 @@ import { WithRouter } from "../utils/Navigation";
 import { useNavigate } from "react-router-dom";
 import { CardBtn } from "../components/Card";
 import axios from "axios";
+import { useTitle } from "../utils/redux/useTitle";
 
 function Home() {
   const navigate = useNavigate();
   const [listPorducts, setListProducts] = useState([]);
+  useTitle("Home");
 
-  const API =
-    "https://virtserver.swaggerhub.com/HERIBUDIYANA/E-Commerce/1.0.0/products";
+  const API = "https://virtserver.swaggerhub.com/HERIBUDIYANA/E-Commerce/1.0.0/products";
   // const token = localStorage.getItem("token");
 
   useEffect(() => {
@@ -35,12 +36,7 @@ function Home() {
         {listPorducts.map((product) => {
           return (
             <div key={product.i}>
-              <CardBtn
-                images={product.images}
-                name={product.name}
-                price={product.price}
-                stock={product.stock}
-              />
+              <CardBtn images={product.images} name={product.name} price={product.price} stock={product.stock} />
             </div>
           );
         })}
