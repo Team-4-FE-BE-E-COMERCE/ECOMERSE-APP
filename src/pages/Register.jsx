@@ -55,12 +55,12 @@ function Register() {
 
   return (
     <div className="container  px-4 mx-auto font-poppins">
-      <div className="grid grid-cols-2">
+      <div className="lg:grid grid-cols-2">
         <div>
           <div className="flex justify-center items-center w-full h-full">
             <div className="w-full flex flex-col items-center justify-center">
-              <h1 className="font-bold text-bgdasar">REGISTER</h1>
-              <div className="w-2/3">
+              <h1 className="font-bold text-bgdasar lg:mt-0 mt-24 lg:mb-2 mb-10">REGISTER</h1>
+              <div className="w-2/3 lg:mb-0 mb-20">
                 <img src={Image} alt="image register" />
               </div>
             </div>
@@ -68,7 +68,7 @@ function Register() {
         </div>
         <div className="w-full h-screen bg-bgdasar container">
           <div className="container  h-full flex flex-col justify-center items-center p-10">
-            <form className="w-full" onSubmit={(e) => handleSubmit(e)}>
+            <form className="lg:w-2/3 w-full" onSubmit={(e) => handleSubmit(e)}>
               <div className=" border-white w-full my-5">
                 <h4 className="text-white">Name</h4>
                 <CustomInput className="w-full border border-white" id="name" type="text" placeholder="Your Name" onChange={(e) => setName(e.target.value)} />
@@ -81,7 +81,7 @@ function Register() {
                 <h4 className="text-white">Password</h4>
                 <CustomInput className="w-full border border-white" id="inputPassword" type="password" placeholder="Your Password" onChange={(e) => setPassword(e.target.value)} />
               </div>
-              <div className="w-full my-5">
+              <div className="w-full my-10">
                 <CustomButton id="btn-register" label="Register" loading={loading || disabled} />
               </div>
             </form>
