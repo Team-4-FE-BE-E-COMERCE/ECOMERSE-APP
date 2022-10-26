@@ -62,7 +62,7 @@ function CardBtn(props) {
   );
 }
 
-function CardCart() {
+function CardCart(props) {
   const [count, setCount] = useState(0);
 
   const imgProduct = {
@@ -81,14 +81,14 @@ function CardCart() {
           </label>
         </div>
         <div className="m-1 border">
-          <img src="https://pict.sindonews.net/dyn/850/pena/news/2021/09/13/700/538850/faktafakta-yang-membuat-hidup-batman-menyedihkan-uri.jpg" alt="" style={imgProduct} />
+          <img src={`${props.images}`} alt={`${props.images}`} style={imgProduct} />
         </div>
         <div className="flex flex-col border m-2 w-full h-full justify-between">
           <div className="m-2">
-            <h2 className="font-bold text-black text-2xl">Product Title</h2>
-            <p>Addres : Alamat : JL. Kyai Mojo, New York Selatan</p>
+            <h2 className="font-bold text-black text-2xl">{props.name}</h2>
+            <p>Address : {props.Address}</p>
           </div>
-          <div className="m-2">Prize : Rp. 50.000</div>
+          <div className="m-2">Price : {props.price}</div>
           <div className="flex flex-row m-2 border">
             <div className="basis-3/4  flex items-center p-2 text-hitam">
               <div className="mr-2">
@@ -100,7 +100,7 @@ function CardCart() {
               <button onClick={() => setCount((count) => count - 1)}>
                 <AiOutlineMinusCircle />
               </button>
-              <div>{count}</div>
+              <div>{props.qti}</div>
               <button onClick={() => setCount((count) => count + 1)}>
                 <AiOutlinePlusCircle />
               </button>
