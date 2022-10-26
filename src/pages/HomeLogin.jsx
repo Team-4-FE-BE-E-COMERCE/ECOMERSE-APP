@@ -2,84 +2,139 @@ import React from "react";
 import Layout from "../components/Layout";
 import { CardBtn } from "../components/Card";
 import CustomInput from "../components/CustomInput";
+import { InputImage } from "../components/CustomComment";
 import { CustomButton } from "../components/CustomButton";
+import Skeleton from "react-loading-skeleton";
+import { CustomCommentDua } from "../components/CustomComment";
 
 import { WithRouter } from "../utils/Navigation";
 
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { handleAuth } from "../utils/redux/reducers/reducer";
+import { useDispatch } from "react-redux";
+import axios from "axios";
+
 function HomeLogin() {
+  const dispath = useDispatch();
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
+  const [datas, setDatas] = useState([]);
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
+  const [stock, setStock] = useState(0);
+  const [description, setDescription] = useState("");
+  const [images, setImages] = useState("");
+  const [disabled, setDisabled] = useState(true);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    if ((name && price && stock && images) || description) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+  }, [name, price, stock, description, images]);
+
+  const fetchData = async () => {
+    axios
+      .get("https://virtserver.swaggerhub.com/HERIBUDIYANA/E-Commerce/1.0.0/products", {})
+      .then((res) => {
+        const { data } = res.data;
+        setDatas(data);
+      })
+      .catch((err) => {
+        const { data } = err.response;
+        if ([401, 403].includes(data.code)) {
+          localStorage.removeItem("token");
+          dispath(handleAuth(false));
+          navigate("/login");
+        }
+        alert(data.message);
+      })
+      .finally(() => setLoading(false));
+  };
+
+  const handleSubmit = async (e) => {
+    setLoading(true);
+    e.preventDefault();
+    const body = {
+      images,
+      price,
+      name,
+      stock,
+      description,
+    };
+    axios
+      .post("https://virtserver.swaggerhub.com/HERIBUDIYANA/E-Commerce/1.0.0/products", body)
+      .then((res) => {
+        console.log(res);
+        const { message, data } = res.data;
+        if (data) {
+          navigate("/productupload");
+        }
+        alert(message);
+      })
+      .catch((err) => {
+        const { message } = err.response.data;
+        alert(message);
+      })
+      .finally(() => setLoading(false));
+  };
+
   return (
     <Layout>
-      <div class="flex flex-row font-poppins">
-        <div class="basis-3/4">
-          <div className="grid grid-cols-3">
-            <CardBtn />
-            <CardBtn />
-            <CardBtn />
-            <CardBtn />
-            <CardBtn />
-            <CardBtn />
-            <CardBtn />
-            <CardBtn />
-            <CardBtn />
-            <CardBtn />
-            <CardBtn />
-            <CardBtn />
-          </div>
+      <div class="lg:flex flex-row font-poppins">
+        <div class="lg:basis-3/4">
+          <div className="grid lg:grid-cols-3">{loading ? <Skeleton /> : datas.map((datum) => <CardBtn produk={datum.name} gambar={datum.images} price={datum.price} stock={datum.stock} />)}</div>
         </div>
-        <div class="basis-1/4 border bg-bgdasar rounded-xl  text-white h-screen mt-2">
+        <form class="lg:basis-1/4 border bg-bgdasar rounded-xl  text-white h-screen mt-2" onSubmit={(e) => handleSubmit(e)}>
           <div className="m-2 text-center font-bold">Upload Your Sales Here</div>
           <div className="px-5">
-            <div className="bg-white">
-              <div class="flex justify-center items-center w-full">
-                <label
-                  for="dropzone-file"
-                  class="flex flex-col justify-center items-center w-full h-64 bg-gray-50 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
-                >
-                  <div class="flex flex-col justify-center items-center pt-5 pb-6">
-                    <svg aria-hidden="true" class="mb-3 w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
-                    </svg>
-                    <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                      <span class="font-semibold">Click to upload</span> or drag and drop
-                    </p>
-                    <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
-                  </div>
-                  <input id="dropzone-file" type="file" class="hidden" />
-                </label>
-              </div>
-            </div>
+            <InputImage
+              images={images}
+              id="dropzone-file"
+              type="file"
+              onChange={(e) => {
+                setImages(URL.createObjectURL(e.target.files[0]));
+              }}
+            />
           </div>
           <div className="p-3">
             <div>
-              <div>Judul Product</div>
+              <div>Tittle Product</div>
               <div>
-                <CustomInput placeholder="Title Produt" type="text" id="titleProduct" />
+                <CustomInput placeholder="Title Produt" type="text" id="titleProduct" onChange={(e) => setName(e.target.value)} />
               </div>
             </div>
             <div>
               <div>Price</div>
               <div>
-                <CustomInput placeholder="Price" type="number" id="price" />
+                <CustomInput placeholder="Price" type="number" id="price" onChange={(e) => setPrice(e.target.value)} />
               </div>
             </div>
             <div>
               <div>Total Product</div>
               <div>
-                <CustomInput placeholder="1" type="number" id="totalProduct" />
+                <CustomInput placeholder="1" type="number" id="totalProduct" onChange={(e) => setStock(e.target.value)} />
               </div>
             </div>
             <div>
               <div>Detail Product</div>
               <div className="pb-2 w-full">
-                <textarea className="w-full rounded-sm" name="DetailProduct" id="detailProduct" cols="" rows="6"></textarea>
+                <CustomCommentDua rows={5} placeholder="Descript your product" onChange={(e) => setDescription(e.target.value)} />
+                {/* <textarea className="w-full rounded-sm" name="DetailProduct" id="detailProduct" cols="" rows="6"></textarea> */}
                 {/* <CustomInput placeholder="Detail Product" type="text" id="detailProduct" /> */}
               </div>
             </div>
             <div className=" w-full">
-              <CustomButton label="Upload" />
+              <CustomButton label="Upload" loading={loading || disabled} />
             </div>
           </div>
-        </div>
+        </form>
       </div>
     </Layout>
   );
