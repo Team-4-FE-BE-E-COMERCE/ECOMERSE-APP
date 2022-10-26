@@ -44,11 +44,10 @@ function Profile(props) {
       })
       .finally(() => setLoading(false));
   };
-  console.log(datas);
   return (
     <Layout>
-      <div className="flex flex-row font-poppins">
-        <div className="basis-1/4">
+      <div className="lg:flex flex-row font-poppins">
+        <div className="lg:basis-1/4">
           <div className=" bg-bgdasar mt-2">
             <div className="flex items-center">
               <div className="text-white  text-7xl m-5">
@@ -57,9 +56,12 @@ function Profile(props) {
               <div className="text-white">
                 <div>{datas.name}</div>
                 <div>{datas.email}</div>
+                <Link to="/">
+                  <h3 className="text-sm text-white">Logout</h3>
+                </Link>
               </div>
             </div>
-            <div className="px-4 text-white">
+            <div className="px-8 text-white">
               <div className="my-4">Number Phone : {datas.phone}</div>
               <div className="my-4">Addres : {datas.address}</div>
               <div className="my-4">Saldo : {datas.saldo}</div>
@@ -88,8 +90,8 @@ function Profile(props) {
             </div>
           </div>
         </div>
-        <div className="basis-3/4">
-          <div className="grid grid-cols-3">{loading ? <Skeleton /> : datas.product.map((datum) => <Card produk={datum.name} gambar={datum.images} harga={datum.price} stock={datum.stock} />)}</div>
+        <div className="lg:basis-3/4">
+          <div className="grid lg:grid-cols-3">{loading ? <Skeleton /> : datas.product.map((datum) => <Card produk={datum.name} gambar={datum.images} harga={datum.price} stock={datum.stock} />)}</div>
         </div>
       </div>
     </Layout>
