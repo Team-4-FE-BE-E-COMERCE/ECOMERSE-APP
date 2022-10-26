@@ -11,6 +11,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { data } from "autoprefixer";
 import Skeleton from "react-loading-skeleton";
+import { Link } from "react-router-dom";
 
 function Profile(props) {
   const dispatch = useDispatch();
@@ -41,17 +42,6 @@ function Profile(props) {
       .finally(() => setLoading(false));
   };
   console.log(datas);
-
-  // const handleSubmit = async(e) =>{
-  //   setLoading(true)
-  //   e.preventDefault()
-  //   const formData = new FormData()
-  //   for (const key in objSubmit){
-  //     formData.append(key, objSubmit[key])
-  //   }
-
-  // }
-
   return (
     <Layout>
       <div className="flex flex-row font-poppins">
@@ -75,7 +65,9 @@ function Profile(props) {
 
             <div className="flex px-4 my-4">
               <div className="w-full m-2">
-                <CustomButton label="Edit Profile" />
+                <Link to="/edit">
+                  <CustomButton label="Edit Profile" />
+                </Link>
               </div>
               <div className="w-full m-2">
                 <CustomButton label="Delete Acc" />
