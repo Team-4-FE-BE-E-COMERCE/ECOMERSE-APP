@@ -2,14 +2,12 @@ import React from "react";
 import { WithRouter } from "../utils/Navigation";
 import Layout from "../components/Layout";
 import { Card } from "../components/Card";
-import { CgProfile } from "react-icons/cg";
 import { CustomButton } from "../components/CustomButton";
 import { useState, useEffect } from "react";
 import { handleAuth } from "../utils/redux/reducers/reducer";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { data } from "autoprefixer";
 import Skeleton from "react-loading-skeleton";
 import { Link } from "react-router-dom";
 import { useTitle } from "../utils/redux/useTitle";
@@ -54,6 +52,23 @@ function Profile(props) {
         console.log(res);
         const { message, data } = res.data;
         navigate("/");
+        alert(message);
+      })
+      .catch((err) => {
+        const { message } = err.response.data;
+        alert(message);
+      })
+      .finally(() => setLoading(false));
+  }
+
+  function deleteProduct() {
+    setLoading(true);
+    axios
+      .delete("https://virtserver.swaggerhub.com/HERIBUDIYANA/E-Commerce/1.0.0/myproducts/1")
+      .then((res) => {
+        console.log(res);
+        const { message } = res.data;
+        navigate("/profile");
         alert(message);
       })
       .catch((err) => {
@@ -115,7 +130,9 @@ function Profile(props) {
           </div>
         </div>
         <div className="lg:basis-3/4">
-          <div className="grid lg:grid-cols-3">{loading ? <Skeleton /> : datas.product.map((datum) => <Card produk={datum.name} gambar={"https://via.placeholder.com/150"} harga={datum.price} stock={datum.stock} />)}</div>
+          <div className="grid lg:grid-cols-3">
+            {loading ? <Skeleton /> : datas.product.map((datum) => <Card produk={datum.name} gambar={"https://via.placeholder.com/150"} harga={datum.price} stock={datum.stock} deleteProduk={() => deleteProduct()} />)}
+          </div>
         </div>
       </div>
     </Layout>

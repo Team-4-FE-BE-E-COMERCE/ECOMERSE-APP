@@ -26,6 +26,14 @@ function Card(props) {
           </div>
           <div>Price : Rp.{props.harga}</div>
           <div>Total stok : {props.stock}</div>
+          <div className="flex">
+            <div className="m-1 w-full">
+              <CustomButtonSatu label="Edit" />
+            </div>
+            <div className="m-1 w-full">
+              <CustomButtonSatu label="Delete" onClick={props.deleteProduk} />
+            </div>
+          </div>
         </div>
       </div>
     </div>
