@@ -65,7 +65,13 @@ function CartDetail() {
     <Layout>
       <div className="lg:flex flex-row fonr-poppins">
         <div className="lg:basis-3/4">
-          <div>{loading ? <Skeleton /> : datas.myCart.map((datum) => <CardCart key={datum.id} images={datum.images} name={datum.name} address={datum.address} price={datum.price} qti={datum.qty} delete={() => handleDelete(datum)} />)}</div>
+          <div>
+            {loading ? (
+              <Skeleton />
+            ) : (
+              datas.myCart.map((datum) => <CardCart key={datum.id} images={"https://via.placeholder.com/150"} name={datum.name} address={datum.address} price={datum.price} qti={datum.qty} delete={() => handleDelete(datum)} />)
+            )}
+          </div>
         </div>
         <div className="lg:basis-1/4 shadow-xl">
           <div className="flex flex-col justify-between w-full border h-full items-center p-5">

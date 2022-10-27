@@ -32,11 +32,11 @@ function Home() {
 
   return (
     <Layout>
-      <div className="grid grid-cols-4">
+      <div className="grid lg:grid-cols-4 sm:grid-cols-2">
         {listPorducts.map((product) => {
           return (
             <div key={product.i}>
-              <CardBtn images={product.images} name={product.name} price={product.price} stock={product.stock} />
+              <CardBtn images={"https://via.placeholder.com/150"} name={product.name} price={product.price} stock={product.stock} />
             </div>
           );
         })}
