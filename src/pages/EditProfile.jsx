@@ -25,7 +25,7 @@ function EditProfile() {
   const [password, setPassword] = useState("");
   const [bio, setBio] = useState("");
   const [images, setImage] = useState("");
-  const [loading, setLoading] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useTitle("Edit Profile");
 
@@ -67,7 +67,7 @@ function EditProfile() {
     axios
       .put("https://virtserver.swaggerhub.com/HERIBUDIYANA/E-Commerce/1.0.0/users", objSubmit)
       .then((res) => {
-        const { message } = res;
+        const { message } = res.data;
         alert(message);
         setObjSubmit({});
         navigate("/profile");
@@ -76,7 +76,7 @@ function EditProfile() {
         const { data } = err.response;
         alert(data.message);
       })
-      .finally(() => fetchData);
+      .finally(() => fetchData());
   };
 
   const handleChange = (value, key) => {
@@ -106,12 +106,13 @@ function EditProfile() {
                   type="file"
                   onChange={(e) => {
                     setImage(URL.createObjectURL(e.target.files[0]));
+                    handleChange(e.target.files[0], "images");
                   }}
                 />
               </div>
             </div>
             <div className="w-full h-2/3">
-              <CustomComment rows={10} cols={30} value={bio} />
+              <CustomComment rows={10} cols={30} value={bio} onChange={(e) => handleChange(e.target.value, "bio")} />
               <div>
                 <div className="flex mb-1">
                   <div className="w-full mr-1">
@@ -131,7 +132,7 @@ function EditProfile() {
               <div className="my-3">
                 <div>
                   <h4>Name</h4>
-                  <CustomInput value={name} type="text" id="editNama" onChange={(e) => handleChange(e.target.value, "email")} />
+                  <CustomInput value={name} type="text" id="editNama" onChange={(e) => handleChange(e.target.value, "name")} />
                 </div>
               </div>
               <div className="my-3">

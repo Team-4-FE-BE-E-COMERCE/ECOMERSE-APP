@@ -20,6 +20,7 @@ import ProductUpload from "../pages/ProductUpload";
 import CartDetail from "../pages/CartDetail";
 import Order from "../pages/Order";
 import OrderHistory from "../pages/OrderHistory";
+import EditProduct from "../pages/EditProduct";
 
 function App() {
   const isLoggedIn = useSelector((state) => state.data.isLoggedIn);
@@ -72,6 +73,7 @@ function App() {
             <Route path="/cart" element={<CartDetail />} />
             <Route path="/order" element={<Order />} />
             <Route path="/orderhistory" element={<OrderHistory />} />
+            <Route path="/editproduct" element={<EditProduct />} />
           </Routes>
         </BrowserRouter>
       </ThemeContext.Provider>

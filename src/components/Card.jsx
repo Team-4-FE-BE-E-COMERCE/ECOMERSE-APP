@@ -3,6 +3,7 @@ import { CustomButtonSatu } from "./CustomButton";
 import { ImBin2 } from "react-icons/im";
 import { AiOutlinePlusCircle, AiOutlineMinusCircle } from "react-icons/ai";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function Card(props) {
   const imgProduct = {
@@ -15,10 +16,9 @@ function Card(props) {
     <div className="grid  font-poppins">
       <div className="m-2 flex flex-col bg-white shadow-lg rounded-md  items-center mb-3">
         <div className="w-full mb-3">
-          {/* https://pict.sindonews.net/dyn/850/pena/news/2021/09/13/700/538850/faktafakta-yang-membuat-hidup-batman-menyedihkan-uri.jpg */}
           <img src={`${props.gambar}`} alt="" style={imgProduct} />
         </div>
-        <div className="Flex justify-start m-2 w-full pl-4">
+        <div className="Flex justify-start m-2 w-full p-2 ">
           <div>
             <h3 className="font-bold text-lg">
               <strong>{props.produk}</strong>
@@ -26,11 +26,13 @@ function Card(props) {
           </div>
           <div>Price : Rp.{props.harga}</div>
           <div>Total stok : {props.stock}</div>
-          <div className="flex">
-            <div className="m-1 w-full">
-              <CustomButtonSatu label="Edit" />
-            </div>
-            <div className="m-1 w-full">
+          <div className="flex mt-3">
+            <Link to="/editproduct" className="w-full mr-1">
+              <div className=" w-full ">
+                <CustomButtonSatu label="Edit" />
+              </div>
+            </Link>
+            <div className=" w-full">
               <CustomButtonSatu label="Delete" onClick={props.deleteProduk} />
             </div>
           </div>

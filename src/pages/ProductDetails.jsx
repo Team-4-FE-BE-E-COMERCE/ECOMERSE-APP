@@ -46,7 +46,7 @@ function ProductDetails() {
       .post("https://virtserver.swaggerhub.com/HERIBUDIYANA/E-Commerce/1.0.0/carts")
       .then((res) => {
         console.log(res);
-        const { message, data } = res.data;
+        const { message } = res.data;
         navigate("/cart");
         alert(message);
       })
@@ -59,17 +59,17 @@ function ProductDetails() {
 
   return (
     <Layout>
-      <div class=" lh:h-[40rem] bg-bgdasar flex items-center p-5 lg:p-5 relative rounded-lg">
+      <div class=" bg-bgdasar flex items-center p-5  relative rounded-lg">
         <div class="lg:flex items-center">
           <div class="w-full lg:w-1/2 md:mb-0">
-            <div class="relative">
+            <div class="relative flex justify-center items-cnter">
               <img src="https://via.placeholder.com/150" class=" h-[30rem] w-[30rem] relative z-10" alt="" />
             </div>
           </div>
           <div class="w-full md:w-1/2 px-10 mt-2">
             <div class="mb-2 font-poppins text-white">
               <p class="font-bold  text-4xl  mb-8">{datas.name}</p>
-              <p class="font-bold  text-2xl mb-2 ">Price : Rp. 50.000</p>
+              <p class="font-bold  text-2xl mb-2 ">Price : Rp. {datas.price}</p>
               <p class="font-bold  text-2xl mb-2">Seller : Andre</p>
               <p class="font-bold  text-2xl mb-2">Stok Total : {datas.stock}</p>
               <p class="font-bold  text-2xl mb-4">Location : JL. Kyai Mojo, New York Selatan</p>
