@@ -46,6 +46,25 @@ function Profile(props) {
       .finally(() => setLoading(false));
   };
 
+  function deleteAcc() {
+    setLoading(true);
+    axios
+      .delete("https://virtserver.swaggerhub.com/HERIBUDIYANA/E-Commerce/1.0.0/users")
+      .then((res) => {
+        console.log(res);
+        const { message, data } = res.data;
+        if (data) {
+          navigate("/profile");
+        }
+        alert(message);
+      })
+      .catch((err) => {
+        const { message } = err.response.data;
+        alert(message);
+      })
+      .finally(() => setLoading(false));
+  }
+
   return (
     <Layout>
       <div className="lg:flex flex-row font-poppins">
@@ -77,7 +96,7 @@ function Profile(props) {
                 </Link>
               </div>
               <div className="w-full m-2">
-                <CustomButton label="Delete Acc" />
+                <CustomButton label="Delete Acc" onClick={() => deleteAcc()} />
               </div>
             </div>
           </div>
