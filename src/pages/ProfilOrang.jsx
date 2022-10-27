@@ -68,7 +68,7 @@ function ProfilOrang() {
           </div>
         </div>
         <div className="lg:basis-3/4">
-          <div className="grid lg:grid-cols-3">{loading ? <Skeleton /> : datas.product.map((datum) => <CardBtn name={datum.name} price={datum.price} stock={datum.stock} images={datum.images} />)}</div>
+          <div className="grid lg:grid-cols-3">{loading ? <Skeleton /> : datas.product.map((datum) => <CardBtn name={datum.name} price={datum.price} stock={datum.stock} images={"https://via.placeholder.com/150"} />)}</div>
         </div>
       </div>
     </Layout>

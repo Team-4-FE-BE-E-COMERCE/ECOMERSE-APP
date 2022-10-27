@@ -67,7 +67,7 @@ function CardCart(props) {
 
   const imgProduct = {
     width: "15em",
-    height: "15em",
+    height: "auto",
     objectFit: "cover",
     borderRadius: "0",
   };

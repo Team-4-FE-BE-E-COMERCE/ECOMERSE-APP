@@ -112,7 +112,7 @@ function Profile(props) {
           </div>
         </div>
         <div className="lg:basis-3/4">
-          <div className="grid lg:grid-cols-3">{loading ? <Skeleton /> : datas.product.map((datum) => <Card produk={datum.name} gambar={datum.images} harga={datum.price} stock={datum.stock} />)}</div>
+          <div className="grid lg:grid-cols-3">{loading ? <Skeleton /> : datas.product.map((datum) => <Card produk={datum.name} gambar={"https://via.placeholder.com/150"} harga={datum.price} stock={datum.stock} />)}</div>
         </div>
       </div>
     </Layout>
