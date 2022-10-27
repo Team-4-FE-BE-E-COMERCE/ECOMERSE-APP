@@ -76,9 +76,7 @@ function HomeLogin() {
       .post("https://virtserver.swaggerhub.com/HERIBUDIYANA/E-Commerce/1.0.0/products", body)
       .then((res) => {
         const { message, data } = res.data;
-        if (data) {
-          navigate("/productupload");
-        }
+        navigate("/productupload");
         alert(message);
       })
       .catch((err) => {
@@ -95,9 +93,7 @@ function HomeLogin() {
       .then((res) => {
         console.log(res);
         const { message, data } = res.data;
-        if (data) {
-          navigate("/cart");
-        }
+        navigate("/cart");
         alert(message);
       })
       .catch((err) => {
@@ -112,7 +108,7 @@ function HomeLogin() {
       <div class="lg:flex flex-row font-poppins">
         <div class="lg:basis-3/4">
           <div className="grid lg:grid-cols-3">
-            {loading ? <Skeleton /> : datas.map((datum) => <CardBtn key={datum.id} name={datum.name} images={"https://via.placeholder.com/150"} price={datum.price} stock={datum.stock} addCart={() => handleCart(datum)} />)}
+            {loading ? <Skeleton /> : datas.map((datum) => <CardBtn key={datum.id} name={datum.name} gambar={datum.images} price={datum.price} stock={datum.stock} addCart={() => handleCart(datum)} />)}
           </div>
         </div>
         <form class="lg:basis-1/4 border bg-bgdasar rounded-xl  text-white h-screen mt-2" onSubmit={(e) => handleSubmit(e)}>

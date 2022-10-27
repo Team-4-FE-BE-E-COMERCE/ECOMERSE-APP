@@ -41,7 +41,7 @@ function Login() {
     axios
       .post(`https://virtserver.swaggerhub.com/HERIBUDIYANA/E-Commerce/1.0.0/login`, body)
       .then((res) => {
-        const { token } = res.data;
+        const { token } = res.data.data;
         localStorage.setItem("token", token);
         dispatch(handleAuth(true));
         alert("Login Successfull");

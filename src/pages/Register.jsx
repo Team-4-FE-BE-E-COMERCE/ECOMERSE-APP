@@ -40,10 +40,10 @@ function Register() {
     axios
       .post("https://virtserver.swaggerhub.com/HERIBUDIYANA/E-Commerce/1.0.0/users", body)
       .then((res) => {
-        const { message, data } = res.data;
-        if (data) {
-          navigate("/login");
-        }
+        const { message } = res.data;
+
+        navigate("/login");
+
         alert(message);
       })
       .catch((err) => {
