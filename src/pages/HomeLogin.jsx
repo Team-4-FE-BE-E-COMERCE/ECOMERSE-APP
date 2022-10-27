@@ -8,6 +8,7 @@ import Skeleton from "react-loading-skeleton";
 import { CustomCommentDua } from "../components/CustomComment";
 
 import { WithRouter } from "../utils/Navigation";
+import { setCart } from "../utils/redux/reducers/reducer";
 
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -74,7 +75,6 @@ function HomeLogin() {
     axios
       .post("https://virtserver.swaggerhub.com/HERIBUDIYANA/E-Commerce/1.0.0/products", body)
       .then((res) => {
-        console.log(res);
         const { message, data } = res.data;
         if (data) {
           navigate("/productupload");
@@ -88,11 +88,32 @@ function HomeLogin() {
       .finally(() => setLoading(false));
   };
 
+  function handleCart() {
+    setLoading(true);
+    axios
+      .post("https://virtserver.swaggerhub.com/HERIBUDIYANA/E-Commerce/1.0.0/carts")
+      .then((res) => {
+        console.log(res);
+        const { message, data } = res.data;
+        if (data) {
+          navigate("/cart");
+        }
+        alert(message);
+      })
+      .catch((err) => {
+        const { message } = err.response.data;
+        alert(message);
+      })
+      .finally(() => setLoading(false));
+  }
+
   return (
     <Layout>
       <div class="lg:flex flex-row font-poppins">
         <div class="lg:basis-3/4">
-          <div className="grid lg:grid-cols-3">{loading ? <Skeleton /> : datas.map((datum) => <CardBtn name={datum.name} gambar={datum.images} price={datum.price} stock={datum.stock} />)}</div>
+          <div className="grid lg:grid-cols-3">
+            {loading ? <Skeleton /> : datas.map((datum) => <CardBtn key={datum.id} name={datum.name} gambar={datum.images} price={datum.price} stock={datum.stock} addCart={() => handleCart(datum)} />)}
+          </div>
         </div>
         <form class="lg:basis-1/4 border bg-bgdasar rounded-xl  text-white h-screen mt-2" onSubmit={(e) => handleSubmit(e)}>
           <div className="m-2 text-center font-bold">Upload Your Sales Here</div>
@@ -129,8 +150,6 @@ function HomeLogin() {
               <div>Detail Product</div>
               <div className="pb-2 w-full">
                 <CustomCommentDua rows={5} placeholder="Descript your product" onChange={(e) => setDescription(e.target.value)} />
-                {/* <textarea className="w-full rounded-sm" name="DetailProduct" id="detailProduct" cols="" rows="6"></textarea> */}
-                {/* <CustomInput placeholder="Detail Product" type="text" id="detailProduct" /> */}
               </div>
             </div>
             <div className=" w-full">
