@@ -32,6 +32,7 @@ function Profile(props) {
       .then((res) => {
         const { data } = res.data;
         setDatas(data);
+        console.log(res);
       })
       .catch((err) => {
         const { data } = err.response;
@@ -44,6 +45,7 @@ function Profile(props) {
       })
       .finally(() => setLoading(false));
   };
+
   return (
     <Layout>
       <div className="lg:flex flex-row font-poppins">

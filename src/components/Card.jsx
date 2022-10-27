@@ -55,7 +55,7 @@ function CardBtn(props) {
           <div>Total stok : {props.stock}</div>
         </div>
         <div className="m-3 w-full px-4">
-          <CustomButtonSatu label="Add To Cart" />
+          <CustomButtonSatu label="Add To Cart" onClick={props.addCart} />
         </div>
       </div>
     </div>
@@ -91,9 +91,9 @@ function CardCart(props) {
           <div className="m-2">Price : {props.price}</div>
           <div className="flex flex-row m-2 border">
             <div className="basis-3/4  flex items-center p-2 text-hitam">
-              <div className="mr-2">
+              <button onClick={props.delete} className="mr-2">
                 <ImBin2 />
-              </div>
+              </button>
               <div>Remove from cart</div>
             </div>
             <div className="basis-1/4  flex justify-between items-center">

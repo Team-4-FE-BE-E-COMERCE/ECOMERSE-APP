@@ -46,6 +46,7 @@ function Login() {
         dispatch(handleAuth(true));
         alert("Login Successfull");
         navigate("/home");
+        console.log(res);
       })
       .catch((err) => {
         const { data } = err.response;

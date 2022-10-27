@@ -1,9 +1,10 @@
 import React from "react";
 import Layout from "../components/Layout";
+import { WithRouter } from "../utils/Navigation";
 import { CardCart } from "../components/Card";
 import { CustomButtonSatu } from "../components/CustomButton";
 import { useTitle } from "../utils/redux/useTitle";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -40,13 +41,31 @@ function CartDetail() {
       })
       .finally(() => setLoading(false));
   };
-  console.log(datas);
+
+  function handleDelete() {
+    setLoading(true);
+    axios
+      .delete("https://virtserver.swaggerhub.com/HERIBUDIYANA/E-Commerce/1.0.0/myproducts/1")
+      .then((res) => {
+        console.log(res);
+        const { message, data } = res.data;
+        if (data) {
+          navigate("/cart");
+        }
+        alert(message);
+      })
+      .catch((err) => {
+        const { message } = err.response.data;
+        alert(message);
+      })
+      .finally(() => setLoading(false));
+  }
 
   return (
     <Layout>
       <div className="lg:flex flex-row fonr-poppins">
         <div className="lg:basis-3/4">
-          <div>{loading ? <Skeleton /> : datas.myCart.map((datum) => <CardCart images={datum.images} name={datum.name} address={datum.address} price={datum.price} qti={datum.qty} />)}</div>
+          <div>{loading ? <Skeleton /> : datas.myCart.map((datum) => <CardCart key={datum.id} images={datum.images} name={datum.name} address={datum.address} price={datum.price} qti={datum.qty} delete={() => handleDelete(datum)} />)}</div>
         </div>
         <div className="lg:basis-1/4 shadow-xl">
           <div className="flex flex-col justify-between w-full border h-full items-center p-5">
@@ -66,4 +85,4 @@ function CartDetail() {
   );
 }
 
-export default CartDetail;
+export default WithRouter(CartDetail);
