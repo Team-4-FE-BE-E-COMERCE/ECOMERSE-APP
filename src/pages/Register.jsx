@@ -59,8 +59,8 @@ function Register() {
         <div>
           <div className="flex justify-center items-center w-full h-full">
             <div className="w-full flex flex-col items-center justify-center">
-              <h1 className="font-bold text-bgdasar lg:mt-0 mt-24 lg:mb-2 mb-10">REGISTER</h1>
-              <div className="w-2/3 lg:mb-0 mb-20">
+              <h1 className="font-bold text-bgdasar lg:mt-0 mt-24 lg:mb-24 mb-10 ">Register</h1>
+              <div className="w-1/2 lg:mb-0 mb-20">
                 <img src={Image} alt="image register" />
               </div>
             </div>
