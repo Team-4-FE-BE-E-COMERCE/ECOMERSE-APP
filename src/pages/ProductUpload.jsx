@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { handleAuth } from "../utils/redux/reducers/reducer";
 import axios from "axios";
+import { CustomButtonSatu } from "../components/CustomButton";
 
 function ProductUpload() {
   const dispath = useDispatch();
@@ -39,13 +40,30 @@ function ProductUpload() {
       .finally(() => setLoading(false));
   };
 
+  function deleteProduct() {
+    setLoading(true);
+    axios
+      .delete("https://virtserver.swaggerhub.com/HERIBUDIYANA/E-Commerce/1.0.0/myproducts/1")
+      .then((res) => {
+        console.log(res);
+        const { message } = res.data;
+        navigate("/profile");
+        alert(message);
+      })
+      .catch((err) => {
+        const { message } = err.response.data;
+        alert(message);
+      })
+      .finally(() => setLoading(false));
+  }
+
   return (
     <Layout>
-      <div class=" lg:h-[40rem] bg-bgdasar flex items-center p-5 lg:p-10 overflow-hidden relative rounded-lg">
+      <div class="bg-bgdasar flex items-center p-5 overflow-hidden relative rounded-lg">
         <div class="lg:flex items-center">
           <div class="w-full lg:w-1/2  md:mb-0">
-            <div class="relative">
-              <img src="https://via.placeholder.com/150" class=" h-[35rem] w-[50rem] relative z-10" alt="" />
+            <div class="relative flex justify-center items-cnter">
+              <img src="https://via.placeholder.com/150" class=" h-[30rem] w-[30rem] relative lg:z-10" alt="" />
             </div>
           </div>
           <div class="w-full md:w-1/2 px-10 mt-2">
@@ -60,6 +78,14 @@ function ProductUpload() {
               <p class="font-bold  text-2xl mb-5">{datas.description}</p>
             </div>
           </div>
+        </div>
+      </div>
+      <div class=" grid grid-cols-2 mt-8 w-full  ">
+        <div className="mx-2">
+          <CustomButtonSatu label="Edit" onClick={() => console.log("klick")} />
+        </div>
+        <div className="mx-2">
+          <CustomButtonSatu label="Delete" onClick={() => deleteProduct()} />
         </div>
       </div>
     </Layout>
