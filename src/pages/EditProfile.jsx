@@ -5,6 +5,7 @@ import { CgProfile } from "react-icons/cg";
 import { CustomButtonSatu } from "../components/CustomButton";
 import CustomInput from "../components/CustomInput";
 import { CustomComment } from "../components/CustomComment";
+import { InputImage } from "../components/CustomComment";
 import { Link } from "react-router-dom";
 import { useTitle } from "../utils/redux/useTitle";
 
@@ -24,6 +25,7 @@ function EditProfile() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [bio, setBio] = useState("");
+  const [images, setImage] = useState("");
   const [loading, setLoading] = useState("");
 
   useTitle("Edit Profile");
@@ -36,7 +38,8 @@ function EditProfile() {
     axios
       .get("https://virtserver.swaggerhub.com/HERIBUDIYANA/E-Commerce/1.0.0/users", {})
       .then((res) => {
-        const { name, phone, address, email, password, bio } = res.data.data;
+        const { name, phone, address, email, password, bio, images } = res.data.data;
+        setImage(images);
         setName(name);
         setPhone(phone);
         setAddress(address);
@@ -66,8 +69,7 @@ function EditProfile() {
       .put("https://virtserver.swaggerhub.com/HERIBUDIYANA/E-Commerce/1.0.0/users", objSubmit)
       .then((res) => {
         const { message } = res;
-        console.log(res);
-        // alert(message);
+        alert(message);
         setObjSubmit({});
         navigate("/profile");
       })
@@ -84,6 +86,12 @@ function EditProfile() {
     setObjSubmit(temp);
   };
 
+  const fotoProfil = {
+    width: "8em",
+    height: "8em",
+    borderRadius: "100%",
+  };
+
   if (loading) {
     return <div>Loading masse...</div>;
   } else {
@@ -92,8 +100,15 @@ function EditProfile() {
         <form className="lg:flex flex-row text-poppins text-white py-20" onSubmit={(e) => handleSubmit(e)}>
           <div className="lg:basis-1/4 lg:mr-2">
             <div className="flex justify-center items-center">
-              <div className="text-white text-9xl rounded-full bg-bgdasar p-2 my-1 h-32 w-32 flex justify-center items-center">
-                <CgProfile />
+              <div className="mb-2" style={fotoProfil}>
+                <InputImage
+                  images={images}
+                  id="dropzone-file"
+                  type="file"
+                  onChange={(e) => {
+                    setImage(URL.createObjectURL(e.target.files[0]));
+                  }}
+                />
               </div>
             </div>
             <div className="w-full h-2/3">

@@ -8,7 +8,6 @@ import Skeleton from "react-loading-skeleton";
 import { CustomCommentDua } from "../components/CustomComment";
 
 import { WithRouter } from "../utils/Navigation";
-import { setCart } from "../utils/redux/reducers/reducer";
 
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
