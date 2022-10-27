@@ -2,33 +2,80 @@ import Layout from "../components/Layout";
 import React from "react";
 import { CustomButtonSatu } from "../components/CustomButton";
 import { useTitle } from "../utils/redux/useTitle";
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { handleAuth } from "../utils/redux/reducers/reducer";
+import axios from "axios";
 
 function ProductDetails() {
+  const dispath = useDispatch();
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
+  const [datas, setDatas] = useState([]);
+
   useTitle("Detail");
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    axios
+      .get("https://virtserver.swaggerhub.com/HERIBUDIYANA/E-Commerce/1.0.0/products/1", {})
+      .then((res) => {
+        const { data } = res.data;
+        console.log(data);
+        setDatas(data);
+      })
+      .catch((err) => {
+        const { data } = err.response;
+        if ([401, 403].includes(data.code)) {
+          localStorage.removeItem("token");
+          dispath(handleAuth(false));
+          navigate("/login");
+        }
+        alert(data.message);
+      })
+      .finally(() => setLoading(false));
+  };
+
+  function handleCart() {
+    setLoading(true);
+    axios
+      .post("https://virtserver.swaggerhub.com/HERIBUDIYANA/E-Commerce/1.0.0/carts")
+      .then((res) => {
+        console.log(res);
+        const { message, data } = res.data;
+        navigate("/cart");
+        alert(message);
+      })
+      .catch((err) => {
+        const { message } = err.response.data;
+        alert(message);
+      })
+      .finally(() => setLoading(false));
+  }
 
   return (
     <Layout>
-      <div class=" h-[40rem] bg-bgdasar flex items-center p-5 lg:p-10 overflow-hidden relative rounded-lg">
-        <div class="md:flex items-center -mx-10 border-pink-300 ml-9">
-          <div class="w-full md:w-1/2 px-10 mb-10 md:mb-0">
+      <div class=" lh:h-[40rem] bg-bgdasar flex items-center p-5 lg:p-5 relative rounded-lg">
+        <div class="lg:flex items-center">
+          <div class="w-full lg:w-1/2 md:mb-0">
             <div class="relative">
-              <img src="https://pict.sindonews.net/dyn/850/pena/news/2021/09/13/700/538850/faktafakta-yang-membuat-hidup-batman-menyedihkan-uri.jpg" class=" h-[35rem] w-[50rem] relative z-10" alt="" />
-              <div class="border-4 border-yellow-200 absolute top-10 bottom-10 left-10 right-10 z-0"></div>
+              <img src="https://via.placeholder.com/150" class=" h-[30rem] w-[30rem] relative z-10" alt="" />
             </div>
           </div>
           <div class="w-full md:w-1/2 px-10 mt-2">
             <div class="mb-2 font-poppins text-white">
-              <p class="font-bold  text-4xl  mb-8">Product Details</p>
+              <p class="font-bold  text-4xl  mb-8">{datas.name}</p>
               <p class="font-bold  text-2xl mb-2 ">Price : Rp. 50.000</p>
               <p class="font-bold  text-2xl mb-2">Seller : Andre</p>
-              <p class="font-bold  text-2xl mb-2">Stok Total : Sisa 2</p>
+              <p class="font-bold  text-2xl mb-2">Stok Total : {datas.stock}</p>
               <p class="font-bold  text-2xl mb-4">Location : JL. Kyai Mojo, New York Selatan</p>
 
               <p class="font-bold  text-2xl mb-4">Detail Produks :</p>
-              <p class="font-bold  text-2xl mb-5">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat.
-              </p>
+              <p class="font-bold  text-2xl mb-5">{datas.description}</p>
             </div>
           </div>
         </div>
@@ -37,7 +84,7 @@ function ProductDetails() {
       <div class=" grid grid-cols-3 mt-8 w-full  ">
         <div></div>
         <div>
-          <CustomButtonSatu label="Add To Cart" />
+          <CustomButtonSatu label="Add To Cart" onClick={() => console.log(handleCart(datas.id))} />
         </div>
       </div>
     </Layout>
