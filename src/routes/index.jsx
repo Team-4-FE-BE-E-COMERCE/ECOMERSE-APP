@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { handleAuth } from "../utils/redux/reducers/reducer";
 import { ThemeContext, TokenContext } from "../utils/context";
 
+import Error10 from "../pages/404";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Home from "../pages";
@@ -50,9 +51,7 @@ function App() {
     } else {
       dispatch(handleAuth(false));
     }
-    axios.defaults.headers.common["Authorization"] = getToken
-      ? `Bearer ${getToken}`
-      : "";
+    axios.defaults.headers.common["Authorization"] = getToken ? `Bearer ${getToken}` : "";
   }, [isLoggedIn]);
 
   return (
@@ -66,7 +65,7 @@ function App() {
             <Route path="/home" element={<HomeLogin />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/profilepenjual" element={<ProfilOrang />} />
-            <Route path="*" element={<div>Kok nda bisa</div>} />
+            <Route path="*" element={<Error10 />} />
             <Route path="/edit" element={<EditProfile />} />
             <Route path="/detailsproduct" element={<ProductDetails />} />
             <Route path="/productupload" element={<ProductUpload />} />

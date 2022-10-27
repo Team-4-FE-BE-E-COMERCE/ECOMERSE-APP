@@ -1,7 +1,6 @@
 import React from "react";
 import { WithRouter } from "../utils/Navigation";
 import Layout from "../components/Layout";
-import { CgProfile } from "react-icons/cg";
 import { CustomButtonSatu } from "../components/CustomButton";
 import CustomInput from "../components/CustomInput";
 import { CustomComment } from "../components/CustomComment";
