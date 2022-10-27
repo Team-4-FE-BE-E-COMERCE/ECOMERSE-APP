@@ -62,6 +62,11 @@ function Profile(props) {
       })
       .finally(() => setLoading(false));
   }
+  const fotoProfil = {
+    width: "1.5em",
+    height: "1.5em",
+    borderRadius: "100%",
+  };
 
   return (
     <Layout>
@@ -70,7 +75,7 @@ function Profile(props) {
           <div className=" bg-bgdasar mt-2">
             <div className="flex items-center">
               <div className="text-white  text-7xl m-5">
-                <CgProfile className="" />
+                <img src="https://via.placeholder.com/150" alt="https://via.placeholder.com/150" style={fotoProfil} />
               </div>
               <div className="text-white">
                 <div>{datas.name}</div>

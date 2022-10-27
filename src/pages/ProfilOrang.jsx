@@ -44,7 +44,11 @@ function ProfilOrang() {
       .finally(() => setLoading(false));
   };
 
-  console.log(datas);
+  const fotoProfil = {
+    width: "6em",
+    height: "6em",
+    borderRadius: "100%",
+  };
 
   return (
     <Layout>
@@ -52,8 +56,8 @@ function ProfilOrang() {
         <div className="lg:basis-1/4">
           <div className=" bg-bgdasar my-2 lg:min-h-screen">
             <div className="flex items-center">
-              <div className="text-white  text-7xl m-5">
-                <CgProfile className="" />
+              <div className="m-5 ">
+                <img src="https://via.placeholder.com/150" alt="https://via.placeholder.com/150" style={fotoProfil} />
               </div>
               <div className="text-white">
                 <div>{datas.name}</div>
