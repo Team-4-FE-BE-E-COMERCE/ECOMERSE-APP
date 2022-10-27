@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import Layout from "../components/Layout";
 
 import { WithRouter } from "../utils/Navigation";
 import { useNavigate } from "react-router-dom";
 import { CardBtn } from "../components/Card";
 import axios from "axios";
 import { useTitle } from "../utils/redux/useTitle";
+import { HeaderDua } from "../components/Header";
+import { Link } from "react-router-dom";
 
 function Home() {
   const navigate = useNavigate();
@@ -31,17 +32,24 @@ function Home() {
   };
 
   return (
-    <Layout>
-      <div className="grid lg:grid-cols-4 sm:grid-cols-2">
-        {listPorducts.map((product) => {
-          return (
-            <div key={product.i}>
-              <CardBtn images={"https://via.placeholder.com/150"} name={product.name} price={product.price} stock={product.stock} />
-            </div>
-          );
-        })}
+    <div>
+      <HeaderDua />
+      <div className="container  px-4 mx-auto items-center">
+        <div className="grid lg:grid-cols-4 sm:grid-cols-2">
+          {listPorducts.map((product) => {
+            return (
+              <div key={product.i}>
+                <Link to="/login">
+                  <div className="text-black">
+                    <CardBtn images={"https://via.placeholder.com/150"} name={product.name} price={product.price} stock={product.stock} />
+                  </div>
+                </Link>
+              </div>
+            );
+          })}
+        </div>
       </div>
-    </Layout>
+    </div>
   );
 }
 

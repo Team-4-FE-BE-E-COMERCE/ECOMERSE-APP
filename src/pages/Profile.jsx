@@ -53,7 +53,7 @@ function Profile(props) {
       .then((res) => {
         console.log(res);
         const { message, data } = res.data;
-        navigate("/login");
+        navigate("/");
         alert(message);
       })
       .catch((err) => {
