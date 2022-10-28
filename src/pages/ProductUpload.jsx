@@ -43,7 +43,7 @@ function ProductUpload() {
   function deleteProduct() {
     setLoading(true);
     axios
-      .delete("https://virtserver.swaggerhub.com/HERIBUDIYANA/E-Commerce/1.0.0/myproducts/1")
+      .delete("products/me/1")
       .then((res) => {
         console.log(res);
         const { message } = res.data;

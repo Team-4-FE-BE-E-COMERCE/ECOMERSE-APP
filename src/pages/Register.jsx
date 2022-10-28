@@ -10,8 +10,11 @@ import { useTitle } from "../utils/redux/useTitle";
 import CustomInput from "../components/CustomInput";
 import { CustomButton } from "../components/CustomButton";
 import Image from "../assets/register.png";
+import withReactContent from "sweetalert2-react-content";
+import Swal from "../utils/Swal";
 
 function Register() {
+  const MySwal = withReactContent(Swal);
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -38,17 +41,23 @@ function Register() {
       password,
     };
     axios
-      .post("https://virtserver.swaggerhub.com/HERIBUDIYANA/E-Commerce/1.0.0/users", body)
+      .post("users", body)
       .then((res) => {
         const { message } = res.data;
-
+        MySwal.fire({
+          title: "Success",
+          text: message,
+          showCancelButton: false,
+        });
         navigate("/login");
-
-        alert(message);
       })
       .catch((err) => {
         const { message } = err.response.data;
-        alert(message);
+        MySwal.fire({
+          title: "Failed",
+          text: message,
+          showCancelButton: false,
+        });
       })
       .finally(() => setLoading(false));
   };

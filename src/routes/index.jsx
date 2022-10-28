@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { handleAuth } from "../utils/redux/reducers/reducer";
 import { ThemeContext, TokenContext } from "../utils/context";
+import useCookies from "react-cookie/cjs/useCookies";
 
 import Error10 from "../pages/404";
 import Login from "../pages/Login";
@@ -22,19 +23,28 @@ import Order from "../pages/Order";
 import OrderHistory from "../pages/OrderHistory";
 import EditProduct from "../pages/EditProduct";
 
+axios.defaults.baseURL = "https://mdanys.online/";
+
 function App() {
-  const isLoggedIn = useSelector((state) => state.data.isLoggedIn);
+  const [cookie, setCookie, removeCookie] = useCookies();
   const dispatch = useDispatch();
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   const [token, setToken] = useState(null);
-
   const background = useMemo(() => ({ theme, setTheme }), [theme]);
-  const jwtToken = useMemo(
-    () => ({
-      token,
-      setToken,
-    }),
-    [token]
+  const jwtToken = useMemo(() => ({ token, setToken }), [token]);
+  const checkToken = cookie.token;
+
+  axios.interceptors.response.use(
+    function (response) {
+      return response;
+    },
+    function (error) {
+      const { data } = error.response;
+      if (data === "Missing or malformed JWT" || [401, 403].includes(data.code)) {
+        removeCookie("token");
+      }
+      return Promise.reject(error);
+    }
   );
 
   useEffect(() => {
@@ -45,15 +55,16 @@ function App() {
     }
   }, [theme]);
 
-  useEffect(() => {
-    const getToken = localStorage.getItem("token");
-    if (getToken) {
+  (function () {
+    if (checkToken) {
+      const { token } = cookie;
       dispatch(handleAuth(true));
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     } else {
       dispatch(handleAuth(false));
+      delete axios.defaults.headers.common["Authorization"];
     }
-    axios.defaults.headers.common["Authorization"] = getToken ? `Bearer ${getToken}` : "";
-  }, [isLoggedIn]);
+  })();
 
   return (
     <TokenContext.Provider value={jwtToken}>
@@ -68,7 +79,7 @@ function App() {
             <Route path="/profilepenjual" element={<ProfilOrang />} />
             <Route path="*" element={<Error10 />} />
             <Route path="/edit" element={<EditProfile />} />
-            <Route path="/detailsproduct" element={<ProductDetails />} />
+            <Route path="/detail/:id_product" element={<ProductDetails />} />
             <Route path="/productupload" element={<ProductUpload />} />
             <Route path="/cart" element={<CartDetail />} />
             <Route path="/order" element={<Order />} />

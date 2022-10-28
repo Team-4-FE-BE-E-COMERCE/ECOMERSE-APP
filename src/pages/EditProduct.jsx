@@ -31,7 +31,7 @@ function EditProduct() {
 
   const fetchData = async () => {
     axios
-      .get("https://virtserver.swaggerhub.com/HERIBUDIYANA/E-Commerce/1.0.0/products/1")
+      .get("products/1")
       .then((res) => {
         const { name, price, stock, description } = res.data.data;
         setName(name);
@@ -59,7 +59,7 @@ function EditProduct() {
       formData.append(key, objSubmit[key]);
     }
     axios
-      .put("https://virtserver.swaggerhub.com/HERIBUDIYANA/E-Commerce/1.0.0/myproducts/1", objSubmit)
+      .put("products/1", objSubmit)
       .then((res) => {
         const { message } = res.data;
         alert(message);

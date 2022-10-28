@@ -52,17 +52,19 @@ function CardBtn(props) {
   return (
     <div className="grid font-poppins">
       <div className="m-2 flex flex-col bg-white shadow-lg rounded-md  items-center mb-3">
-        <div className="w-full mb-3">
-          <img src={props.images} alt="" style={imgProduct} />
-        </div>
-        <div className="Flex justify-start m-2 w-full pl-4">
-          <div>
-            <h3 className="font-bold text-lg">
-              <strong>{props.name}</strong>
-            </h3>
+        <div className="w-full" onClick={props.onDetail}>
+          <div className="w-full mb-3">
+            <img src={props.images} alt="" style={imgProduct} />
           </div>
-          <div>Prise : Rp.{props.price}</div>
-          <div>Total stok : {props.stock}</div>
+          <div className="Flex justify-start m-2 w-full pl-4">
+            <div>
+              <h3 className="font-bold text-lg">
+                <strong>{props.name}</strong>
+              </h3>
+            </div>
+            <div>Prise : Rp.{props.price}</div>
+            <div>Total stok : {props.stock}</div>
+          </div>
         </div>
         <div className="m-3 w-full px-4">
           <CustomButtonSatu label="Add To Cart" onClick={props.addCart} />

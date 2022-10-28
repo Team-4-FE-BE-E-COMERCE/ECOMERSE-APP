@@ -35,8 +35,9 @@ function EditProfile() {
 
   const fetchData = async () => {
     axios
-      .get("https://virtserver.swaggerhub.com/HERIBUDIYANA/E-Commerce/1.0.0/users", {})
+      .get("users", {})
       .then((res) => {
+        console.log(res);
         const { name, phone, address, email, password, bio, images } = res.data.data;
         setImage(images);
         setName(name);
@@ -65,8 +66,9 @@ function EditProfile() {
       formData.append(key, objSubmit[key]);
     }
     axios
-      .put("https://virtserver.swaggerhub.com/HERIBUDIYANA/E-Commerce/1.0.0/users", objSubmit)
+      .put("users", objSubmit)
       .then((res) => {
+        console.log(res);
         const { message } = res.data;
         alert(message);
         setObjSubmit({});

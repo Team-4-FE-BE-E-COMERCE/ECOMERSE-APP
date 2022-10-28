@@ -11,7 +11,6 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { handleAuth } from "../utils/redux/reducers/reducer";
 import Skeleton from "react-loading-skeleton";
-import { data } from "autoprefixer";
 
 function ProfilOrang() {
   const dispatch = useDispatch();
@@ -43,6 +42,22 @@ function ProfilOrang() {
       })
       .finally(() => setLoading(false));
   };
+  function handleCart() {
+    setLoading(true);
+    axios
+      .post("https://virtserver.swaggerhub.com/HERIBUDIYANA/E-Commerce/1.0.0/carts")
+      .then((res) => {
+        console.log(res);
+        const { message, data } = res.data;
+        navigate("/cart");
+        alert(message);
+      })
+      .catch((err) => {
+        const { message } = err.response.data;
+        alert(message);
+      })
+      .finally(() => setLoading(false));
+  }
 
   const fotoProfil = {
     width: "6em",
@@ -72,7 +87,9 @@ function ProfilOrang() {
           </div>
         </div>
         <div className="lg:basis-3/4">
-          <div className="grid lg:grid-cols-3">{loading ? <Skeleton /> : datas.product.map((datum) => <CardBtn name={datum.name} price={datum.price} stock={datum.stock} images={"https://via.placeholder.com/150"} />)}</div>
+          <div className="grid lg:grid-cols-3">
+            {loading ? <Skeleton /> : datas.product.map((datum) => <CardBtn name={datum.name} price={datum.price} stock={datum.stock} images={"https://via.placeholder.com/150"} addCart={() => handleCart(datum)} />)}
+          </div>
         </div>
       </div>
     </Layout>
