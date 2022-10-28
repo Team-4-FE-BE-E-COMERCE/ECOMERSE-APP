@@ -10,8 +10,11 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { handleAuth } from "../utils/redux/reducers/reducer";
 import Skeleton from "react-loading-skeleton";
+import withReactContent from "sweetalert2-react-content";
+import Swal from "../utils/Swal";
 
 function CartDetail() {
+  const MySwal = withReactContent(Swal);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
@@ -31,13 +34,12 @@ function CartDetail() {
         setDatas(data);
       })
       .catch((err) => {
-        const { data } = err.response;
-        if ([401, 403].includes(data.code)) {
-          localStorage.removeItem("token");
-          dispatch(handleAuth(false));
-          navigate("/login");
-        }
-        alert(data.message);
+        const { message } = err.response.data;
+        MySwal.fire({
+          title: "Failed",
+          text: message,
+          showCancelButton: false,
+        });
       })
       .finally(() => setLoading(false));
   };

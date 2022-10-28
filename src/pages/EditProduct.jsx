@@ -12,8 +12,11 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import withReactContent from "sweetalert2-react-content";
+import Swal from "../utils/Swal";
 
 function EditProduct() {
+  const MySwal = withReactContent(Swal);
   const navigate = useNavigate();
   const dispath = useDispatch();
   const [objSubmit, setObjSubmit] = useState("");
@@ -40,13 +43,12 @@ function EditProduct() {
         setDescription(description);
       })
       .catch((err) => {
-        const { data } = err.response;
-        if ([401, 403].includes(data.code)) {
-          localStorage.removeItem("token");
-          dispath(handleAuth(false));
-          navigate("/login");
-        }
-        alert(data.message);
+        const { message } = err.response.data;
+        MySwal.fire({
+          title: "Failed",
+          text: message,
+          showCancelButton: false,
+        });
       })
       .finally(() => setLoading(false));
   };
@@ -67,8 +69,12 @@ function EditProduct() {
         navigate("/profile");
       })
       .catch((err) => {
-        const { data } = err.response;
-        alert(data.message);
+        const { message } = err.response.data;
+        MySwal.fire({
+          title: "Failed",
+          text: message,
+          showCancelButton: false,
+        });
       })
       .finally(() => fetchData());
   };

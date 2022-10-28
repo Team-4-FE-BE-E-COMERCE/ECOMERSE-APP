@@ -7,6 +7,8 @@ import { CustomComment } from "../components/CustomComment";
 import { InputImage } from "../components/CustomComment";
 import { Link } from "react-router-dom";
 import { useTitle } from "../utils/redux/useTitle";
+import withReactContent from "sweetalert2-react-content";
+import Swal from "../utils/Swal";
 
 import { handleAuth } from "../utils/redux/reducers/reducer";
 import { useState, useEffect } from "react";
@@ -15,6 +17,7 @@ import { useDispatch } from "react-redux";
 import axios from "axios";
 
 function EditProfile() {
+  const MySwal = withReactContent(Swal);
   const navigate = useNavigate();
   const disspath = useDispatch();
   const [objSubmit, setObjSubmit] = useState("");
@@ -48,13 +51,12 @@ function EditProfile() {
         setBio(bio);
       })
       .catch((err) => {
-        const { data } = err.response;
-        if ([401, 403].includes(data.code)) {
-          localStorage.removeItem("token");
-          disspath(handleAuth(false));
-          navigate("/login");
-        }
-        alert(data.message);
+        const { message } = err.response.data;
+        MySwal.fire({
+          title: "Failed",
+          text: message,
+          showCancelButton: false,
+        });
       })
       .finally(() => setLoading(false));
   };
@@ -75,8 +77,12 @@ function EditProfile() {
         navigate("/profile");
       })
       .catch((err) => {
-        const { data } = err.response;
-        alert(data.message);
+        const { message } = err.response.data;
+        MySwal.fire({
+          title: "Failed",
+          text: message,
+          showCancelButton: false,
+        });
       })
       .finally(() => fetchData());
   };
