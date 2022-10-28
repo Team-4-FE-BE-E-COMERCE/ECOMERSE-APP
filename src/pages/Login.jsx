@@ -46,10 +46,8 @@ function Login() {
     axios
       .post("login", body)
       .then((res) => {
-        console.log(res);
         const { data, message } = res.data;
         setCookie("token", data.token, { path: "/login" });
-
         dispatch(handleAuth(true));
         MySwal.fire({
           title: "Succes",

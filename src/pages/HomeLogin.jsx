@@ -15,8 +15,11 @@ import { handleAuth } from "../utils/redux/reducers/reducer";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { useTitle } from "../utils/redux/useTitle";
+import withReactContent from "sweetalert2-react-content";
+import Swal from "../utils/Swal";
 
 function HomeLogin(props) {
+  const MySwal = withReactContent(Swal);
   const dispath = useDispatch();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
@@ -45,19 +48,18 @@ function HomeLogin(props) {
 
   const fetchData = async () => {
     axios
-      .get("https://mdanys.online/products", {})
+      .get("products", {})
       .then((res) => {
         const { data } = res.data;
         setDatas(data);
       })
       .catch((err) => {
-        const { data } = err.response;
-        if ([401, 403].includes(data.code)) {
-          localStorage.removeItem("token");
-          dispath(handleAuth(false));
-          navigate("/login");
-        }
-        alert(data.message);
+        const { message } = err.response.data;
+        MySwal.fire({
+          title: "Failed",
+          text: message,
+          showCancelButton: false,
+        });
       })
       .finally(() => setLoading(false));
   };
@@ -71,7 +73,7 @@ function HomeLogin(props) {
     }
 
     axios
-      .post("https://mdanys.online/products", objSubmit, {
+      .post("products", objSubmit, {
         headers: {
           "content-type": `multipart/form-data`,
         },
@@ -83,7 +85,11 @@ function HomeLogin(props) {
       })
       .catch((err) => {
         const { message } = err.response.data;
-        alert(message);
+        MySwal.fire({
+          title: "Failed",
+          text: message,
+          showCancelButton: false,
+        });
       })
       .finally(() => setLoading(false));
   };
@@ -97,16 +103,19 @@ function HomeLogin(props) {
   function handleCart() {
     setLoading(true);
     axios
-      .post("https://mdanys.online/carts")
+      .post("carts")
       .then((res) => {
-        console.log(res);
         const { message, data } = res.data;
         navigate("/cart");
         alert(message);
       })
       .catch((err) => {
         const { message } = err.response.data;
-        alert(message);
+        MySwal.fire({
+          title: "Failed",
+          text: message,
+          showCancelButton: false,
+        });
       })
       .finally(() => setLoading(false));
   }
