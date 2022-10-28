@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  carts: [],
   isLoggedIn: false,
 };
 
@@ -12,9 +11,6 @@ const sliceState = createSlice({
     handleAuth: (state, action) => {
       state.isLoggedIn = action.payload;
     },
-    setCart: (state, action) => {
-      state.carts = action.payload;
-    },
   },
 });
 
@@ -22,5 +18,5 @@ const reducer = {
   state: sliceState.reducer,
 };
 
-export const { handleAuth, setCart } = sliceState.actions;
+export const { handleAuth } = sliceState.actions;
 export default reducer;

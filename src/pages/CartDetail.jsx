@@ -25,7 +25,7 @@ function CartDetail() {
 
   const fetchData = async () => {
     axios
-      .get("https://virtserver.swaggerhub.com/HERIBUDIYANA/E-Commerce/1.0.0/carts", {})
+      .get("carts", {})
       .then((res) => {
         const { data } = res;
         setDatas(data);
@@ -45,7 +45,7 @@ function CartDetail() {
   function handleDelete() {
     setLoading(true);
     axios
-      .delete("https://virtserver.swaggerhub.com/HERIBUDIYANA/E-Commerce/1.0.0/myproducts/1")
+      .delete("products/1")
       .then((res) => {
         console.log(res);
         const { message, data } = res.data;

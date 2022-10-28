@@ -11,8 +11,11 @@ import { useNavigate } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import { Link } from "react-router-dom";
 import { useTitle } from "../utils/redux/useTitle";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
-function Profile(props) {
+function Profile() {
+  const MySwal = withReactContent(Swal);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
@@ -26,20 +29,19 @@ function Profile(props) {
 
   const fetchData = async () => {
     axios
-      .get("https://virtserver.swaggerhub.com/HERIBUDIYANA/E-Commerce/1.0.0/users", {})
+      .get("users")
       .then((res) => {
+        console.log(res);
         const { data } = res.data;
         setDatas(data);
-        console.log(res);
       })
       .catch((err) => {
         const { data } = err.response;
-        if ([401, 403].includes(data.code)) {
-          localStorage.removeItem("token");
-          dispatch(handleAuth(false));
-          navigate("/login");
-        }
-        alert(data.message);
+        MySwal.fire({
+          title: "Failed",
+          text: data.message,
+          showCancelButton: false,
+        });
       })
       .finally(() => setLoading(false));
   };
@@ -47,7 +49,7 @@ function Profile(props) {
   function deleteAcc() {
     setLoading(true);
     axios
-      .delete("https://virtserver.swaggerhub.com/HERIBUDIYANA/E-Commerce/1.0.0/users")
+      .delete("users")
       .then((res) => {
         console.log(res);
         const { message, data } = res.data;
@@ -64,7 +66,7 @@ function Profile(props) {
   function deleteProduct() {
     setLoading(true);
     axios
-      .delete("https://virtserver.swaggerhub.com/HERIBUDIYANA/E-Commerce/1.0.0/myproducts/1")
+      .delete("product/1")
       .then((res) => {
         console.log(res);
         const { message } = res.data;
@@ -130,9 +132,7 @@ function Profile(props) {
           </div>
         </div>
         <div className="lg:basis-3/4">
-          <div className="grid lg:grid-cols-3">
-            {loading ? <Skeleton /> : datas.product.map((datum) => <Card produk={datum.name} gambar={"https://via.placeholder.com/150"} harga={datum.price} stock={datum.stock} deleteProduk={() => deleteProduct()} />)}
-          </div>
+          {/* <div className="grid lg:grid-cols-3">{loading ? <Skeleton /> : datas.product.map((datum) => <Card produk={datum.name} gambar={datum.images} harga={datum.price} stock={datum.stock} deleteProduk={() => deleteProduct()} />)}</div> */}
         </div>
       </div>
     </Layout>

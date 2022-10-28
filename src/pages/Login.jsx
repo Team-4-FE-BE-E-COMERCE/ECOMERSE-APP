@@ -12,8 +12,13 @@ import CustomInput from "../components/CustomInput";
 import { CustomButton } from "../components/CustomButton";
 import { useTitle } from "../utils/redux/useTitle";
 import ImageLogin from "../assets/login.png";
+import { useCookies } from "react-cookie";
+import Swal from "../utils/Swal";
+import withReactContent from "sweetalert2-react-content";
 
 function Login() {
+  const MySwal = withReactContent(Swal);
+  const [cookies, setCookie] = useCookies(["token"]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
@@ -39,18 +44,27 @@ function Login() {
       password,
     };
     axios
-      .post(`https://virtserver.swaggerhub.com/HERIBUDIYANA/E-Commerce/1.0.0/login`, body)
+      .post("login", body)
       .then((res) => {
-        const { token } = res.data.data;
-        localStorage.setItem("token", token);
-        dispatch(handleAuth(true));
-        alert("Login Successfull");
-        navigate("/home");
         console.log(res);
+        const { data, message } = res.data;
+        setCookie("token", data.token, { path: "/login" });
+
+        dispatch(handleAuth(true));
+        MySwal.fire({
+          title: "Succes",
+          text: message,
+          showCancelButton: false,
+        });
+        navigate("/home");
       })
       .catch((err) => {
         const { data } = err.response;
-        alert(data.message);
+        MySwal.fire({
+          title: "Failed",
+          text: data.message,
+          showCancelButton: false,
+        });
       })
       .finally(() => setLoading(false));
   };

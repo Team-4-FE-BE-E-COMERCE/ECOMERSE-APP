@@ -13,7 +13,7 @@ function Home() {
   const [listPorducts, setListProducts] = useState([]);
   useTitle("Home");
 
-  const API = "https://virtserver.swaggerhub.com/HERIBUDIYANA/E-Commerce/1.0.0/products";
+  const API = "https://mdanys.online/products";
   // const token = localStorage.getItem("token");
 
   useEffect(() => {
@@ -41,7 +41,7 @@ function Home() {
               <div key={product.i}>
                 <Link to="/login">
                   <div className="text-black">
-                    <CardBtn images={"https://via.placeholder.com/150"} name={product.name} price={product.price} stock={product.stock} />
+                    <CardBtn images={product.images} name={product.name} price={product.price} stock={product.stock} />
                   </div>
                 </Link>
               </div>

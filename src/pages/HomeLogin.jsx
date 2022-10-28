@@ -6,7 +6,7 @@ import { InputImage } from "../components/CustomComment";
 import { CustomButton } from "../components/CustomButton";
 import Skeleton from "react-loading-skeleton";
 import { CustomCommentDua } from "../components/CustomComment";
-
+import { Axios } from "axios";
 import { WithRouter } from "../utils/Navigation";
 
 import { useState, useEffect } from "react";
@@ -16,7 +16,7 @@ import { useDispatch } from "react-redux";
 import axios from "axios";
 import { useTitle } from "../utils/redux/useTitle";
 
-function HomeLogin() {
+function HomeLogin(props) {
   const dispath = useDispatch();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
@@ -27,6 +27,7 @@ function HomeLogin() {
   const [description, setDescription] = useState("");
   const [images, setImages] = useState("");
   const [disabled, setDisabled] = useState(true);
+  const [objSubmit, setObjSubmit] = useState("");
 
   useTitle("Home");
 
@@ -44,7 +45,7 @@ function HomeLogin() {
 
   const fetchData = async () => {
     axios
-      .get("https://virtserver.swaggerhub.com/HERIBUDIYANA/E-Commerce/1.0.0/products", {})
+      .get("https://mdanys.online/products", {})
       .then((res) => {
         const { data } = res.data;
         setDatas(data);
@@ -64,17 +65,19 @@ function HomeLogin() {
   const handleSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
-    const body = {
-      images,
-      price,
-      name,
-      stock,
-      description,
-    };
+    const formData = new FormData();
+    for (const key in objSubmit) {
+      formData.append(key, objSubmit[key]);
+    }
+
     axios
-      .post("https://virtserver.swaggerhub.com/HERIBUDIYANA/E-Commerce/1.0.0/products", body)
+      .post("https://mdanys.online/products", objSubmit, {
+        headers: {
+          "content-type": `multipart/form-data`,
+        },
+      })
       .then((res) => {
-        const { message, data } = res.data;
+        const { message } = res.data;
         navigate("/productupload");
         alert(message);
       })
@@ -85,10 +88,16 @@ function HomeLogin() {
       .finally(() => setLoading(false));
   };
 
+  const handleChange = (value, key) => {
+    let temp = { ...objSubmit };
+    temp[key] = value;
+    setObjSubmit(temp);
+  };
+
   function handleCart() {
     setLoading(true);
     axios
-      .post("https://virtserver.swaggerhub.com/HERIBUDIYANA/E-Commerce/1.0.0/carts")
+      .post("https://mdanys.online/carts")
       .then((res) => {
         console.log(res);
         const { message, data } = res.data;
@@ -107,7 +116,11 @@ function HomeLogin() {
       <div class="lg:flex flex-row font-poppins">
         <div class="lg:basis-3/4">
           <div className="grid lg:grid-cols-3">
-            {loading ? <Skeleton /> : datas.map((datum) => <CardBtn key={datum.id} name={datum.name} images={"https://via.placeholder.com/150"} price={datum.price} stock={datum.stock} addCart={() => handleCart(datum)} />)}
+            {loading ? (
+              <Skeleton />
+            ) : (
+              datas.map((datum) => <CardBtn key={datum.id} name={datum.name} images={datum.images} price={datum.price} stock={datum.stock} addCart={() => handleCart(datum)} onDetail={() => props.navigate(`/detail/${datum.id}`)} />)
+            )}
           </div>
         </div>
         <form class="lg:basis-1/4 border bg-bgdasar rounded-xl  text-white h-screen mt-2" onSubmit={(e) => handleSubmit(e)}>
@@ -119,6 +132,7 @@ function HomeLogin() {
               type="file"
               onChange={(e) => {
                 setImages(URL.createObjectURL(e.target.files[0]));
+                handleChange(e.target.files[0], "images");
               }}
             />
           </div>
